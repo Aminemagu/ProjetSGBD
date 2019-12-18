@@ -8,6 +8,8 @@ package com.sgbd.projetsgbd;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,6 +23,8 @@ public class App extends javax.swing.JFrame {
     /** Creates new form App */
     public App() {
         initComponents();
+        
+        
         setTitle("Arnaud BD");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
@@ -39,8 +43,37 @@ public class App extends javax.swing.JFrame {
         JTable tableau = new JTable(donnees, entetes);
        this.jPanel1.add(new JScrollPane(tableau), BorderLayout.CENTER);
        pack();
+       genereTable1();
     }
 
+    public void genereTable1(){
+    
+        List<String> attribut = new ArrayList<String>();
+        attribut.add("id_etu");
+        attribut.add("nom");
+        attribut.add("ville");
+        
+        Table tableR = new Table(attribut);
+        
+        List<String> l1 = new ArrayList<>();
+        l1.add("12");
+        l1.add("Francois");
+        l1.add("Dijon");
+        tableR.insertLigne(l1);
+        List<String> l2 = new ArrayList<>();
+        l2.add("13");
+        l2.add("Tanguy");
+        l2.add("Macon");
+        tableR.insertLigne(l2);
+        List<String> l3 = new ArrayList<String>();
+        l3.add("14");
+        l3.add("Arnaud");
+        l3.add("Dijon");
+        tableR.insertLigne(l3);
+        
+        System.out.println(tableR.toString());
+        
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

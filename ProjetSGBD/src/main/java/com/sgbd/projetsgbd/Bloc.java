@@ -5,6 +5,7 @@
  */
 package com.sgbd.projetsgbd;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,11 +14,16 @@ import java.util.List;
  */
 public class Bloc {
     private int taille;
-    private List<Ligne> l;
+    private List<Ligne> lignes;
 
     public Bloc(int taille, List<Ligne> l) {
         this.taille = taille;
-        this.l = l;
+        this.lignes = l;
+    }
+
+    public Bloc() {
+        this.taille = 8192;
+        this.lignes = new ArrayList<Ligne>();
     }
 
     public int getTaille() {
@@ -28,12 +34,32 @@ public class Bloc {
         this.taille = taille;
     }
 
-    public List<Ligne> getL() {
-        return l;
+    public List<Ligne> getLignes() {
+        return lignes;
     }
 
-    public void setL(List<Ligne> l) {
-        this.l = l;
+    public void setLignes(List<Ligne> l) {
+        this.lignes = l;
+    }
+
+    public int getFreespace() {
+        int used_space = 0;
+        for(int i =0 ;i< lignes.size();i++){
+            used_space += lignes.get(i).getTaille();
+        }
+        return this.taille-used_space;
+    }
+
+    @Override
+    public String toString() {
+       
+        String res = "blocs {\n" ;
+        for (int i =0 ; i<lignes.size();i++){
+           res += "\t\t"+ i + " : " + lignes.get(i).toString()+ "\n";
+        } 
+        res +="\t}";
+        
+        return res;
     }
     
     
