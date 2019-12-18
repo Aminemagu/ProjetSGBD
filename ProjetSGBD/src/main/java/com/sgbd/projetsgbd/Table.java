@@ -14,12 +14,14 @@ import java.util.List;
  */
 public class Table {
     private List<Bloc> blocs;
+    private String nom;
     private List<Indexes> indexes;
     private List<String> atribut;
     
 
-    public Table(List<String> l) {
+    public Table(String n,List<String> l) {
         this.atribut = l;
+        this.nom = n;
         this.blocs = new ArrayList<Bloc>();
         this.blocs.add(new Bloc());
         this.indexes = new ArrayList<Indexes>();
@@ -35,6 +37,14 @@ public class Table {
 
     public List<Indexes> getIndexes() {
         return indexes;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public List<String> getAtribut() {
+        return atribut;
     }
 
     public void setIndexes(List<Indexes> indexes) {
@@ -65,6 +75,16 @@ public class Table {
         res +='}';
         
         return res;
+    }
+
+    int count() {
+        int nb = 0 ;
+        for (int i =0 ; i<blocs.size();i++){
+          nb += blocs.get(i).getLignes().size();
+        } 
+      
+        
+        return nb;
     }
     
     
