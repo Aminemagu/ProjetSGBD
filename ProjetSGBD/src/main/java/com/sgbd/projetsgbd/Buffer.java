@@ -14,7 +14,7 @@ import java.util.List;
 public class Buffer {
     private int capacite;
     private List<Bloc> b;
-
+    
     public Buffer(int capacite, List<Bloc> b) {
         this.capacite = capacite;
         this.b = b;
