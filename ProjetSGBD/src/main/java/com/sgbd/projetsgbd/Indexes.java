@@ -5,11 +5,28 @@
  */
 package com.sgbd.projetsgbd;
 
+import java.util.Hashtable;
+import java.util.List;
+
 /**
  *
  * @author tb985403
  */
 public class Indexes {
-    private String attr;
+    Hashtable<Integer, String> hm; 
+    
+    public Indexes() {
+        this.hm = new Hashtable<Integer, String>();
+    }
+
+    public Hashtable<Integer, String> getHm() {
+        return hm;
+    }
+
+    public void setHm(Hashtable<Integer, String> hm) {
+        this.hm = hm;
+    }
+    
+    
     
 }
