@@ -5,12 +5,38 @@
  */
 package com.sgbd.projetsgbd;
 
+import java.util.List;
+
 /**
  *
  * @author tb985403
  */
 public class MemoireCache {
     
-private Buffer b;
-    
+private List<Buffer> b;
+private int capacite;
+
+    public MemoireCache(List<Buffer> b, int capacite) {
+        this.b = b;
+        this.capacite = capacite;
+    }
+
+    public List<Buffer> getB() {
+        return b;
+    }
+
+    public void setB(List<Buffer> b) {
+        this.b = b;
+    }
+
+    public int getCapacite() {
+        return capacite;
+    }
+
+    public void setCapacite(int capacite) {
+        this.capacite = capacite;
+    }
+
+
+
 }
