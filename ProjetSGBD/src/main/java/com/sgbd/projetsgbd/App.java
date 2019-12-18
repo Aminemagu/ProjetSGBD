@@ -21,28 +21,23 @@ import javax.swing.JTable;
 public class App extends javax.swing.JFrame {
 
     private List<Table> lestables;
+    private MemoireCache memCache;
+    
 
     /**
      * Creates new form App
      */
     public App() {
         initComponents();
-
+        this.memCache=new MemoireCache();
         setTitle("Arnaud BD");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        /*Object[][] donnees = {
-                {"Johnathan", "Sykes", Color.red, true, "Sport.TENNIS"},
-                {"Nicolas", "Van de Kampf", Color.black, true, "Sport.FOOTBAL"},
-                {"Damien", "Cuthbert", Color.cyan, true, "Sport.RIEN"},
-                {"Corinne", "Valance", Color.blue, false, "Sport.NATATION"},
-                {"Emilie", "Schrödinger", Color.magenta, false, "Sport.FOOTBALL"},
-                {"Delphine", "Duke", Color.yellow, false, "Sport.TENNIS"},
-                {"Eric", "Trump", Color.pink, true, "Sport.FOOTBALL"},
-        };*/
         this.lestables = new ArrayList<Table>();
         this.lestables.add(genereTable1());
         this.lestables.add(genereTable2());
+        Table R= lestables.get(0);
+        Table S= lestables.get(1);
+        this.lestables.add(ProduitCartesien(R,"ville",S,"Ville"));
         afficheTable(lestables, "Etudiant");
 
     }
@@ -80,6 +75,8 @@ public class App extends javax.swing.JFrame {
         }
         System.out.println(tableR.toString());
         return tableR;
+        
+      
 
     }
 
@@ -263,4 +260,37 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+
+    private Table ProduitCartesien(Table R, String a, Table S, String b) {
+       
+        Table res = genereTableJoin(R, a, S, b);
+        String nomTable = "RESCART"+R.getNom()+"U"+S.getNom()+a;
+        res.setNom(nomTable);
+        
+        
+
+        return res;
+    }
+    
+
+
+    private Table genereTableJoin(Table R, String a, Table S, String b) {
+        List<String> attributNewTable = new ArrayList<String>();
+        for (int i=0;i<R.getAtribut().size();i++){
+            attributNewTable.add(R.getAtribut().get(i));
+            System.out.println(R.getAtribut().get(i));
+        }
+        for (int i=0;i<S.getAtribut().size();i++){
+            if(!(S.getAtribut().get(i).equals(b))){
+                attributNewTable.add(S.getAtribut().get(i));
+                System.out.println(S.getAtribut().get(i));
+            }
+        }
+
+        Table res = new Table("RES", attributNewTable);
+        return res;
+    }
+    
+    
+    
 }

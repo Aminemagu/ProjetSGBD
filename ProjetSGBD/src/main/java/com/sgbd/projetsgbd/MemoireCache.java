@@ -5,6 +5,7 @@
  */
 package com.sgbd.projetsgbd;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,30 +14,45 @@ import java.util.List;
  */
 public class MemoireCache {
     
-private List<Buffer> b;
-private int capacite;
+    private List<Buffer> buffers;
+    private int M;
 
-    public MemoireCache(List<Buffer> b, int capacite) {
-        this.b = b;
-        this.capacite = capacite;
+    public MemoireCache() {
+        this.M= 4;
+        this.buffers = new ArrayList<Buffer>();
+        for(int i = 0 ;i<this.M;i++){
+            buffers.add(new Buffer());
+        }
+        
     }
 
-    public List<Buffer> getB() {
-        return b;
+
+    public List<Buffer> getBuffers() {
+        return buffers;
     }
 
-    public void setB(List<Buffer> b) {
-        this.b = b;
+    public void setBuffers(List<Buffer> buffers) {
+        this.buffers = buffers;
     }
 
-    public int getCapacite() {
-        return capacite;
+    public int getM() {
+        return M;
     }
 
-    public void setCapacite(int capacite) {
-        this.capacite = capacite;
+    public void setM(int M) {
+        this.M = M;
     }
 
+    /*void chargeBufferCart(Table R, Table S) {
+        
+        for(int i=0; i<this.M;i++)
+        {//on ajoute tous les blocs de R 
+            this.buffers.add(R.getBlocs().get(i));
+                    }
+        //le dernier 
+    }*/
+    
+    
 
 
 }

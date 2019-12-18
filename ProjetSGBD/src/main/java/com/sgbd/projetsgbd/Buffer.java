@@ -5,6 +5,7 @@
  */
 package com.sgbd.projetsgbd;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,9 +16,13 @@ public class Buffer {
     private int capacite;
     private List<Bloc> b;
     
-    public Buffer(int capacite, List<Bloc> b) {
-        this.capacite = capacite;
-        this.b = b;
+
+    public Buffer(){
+        this.capacite=3;
+        this.b = new ArrayList<Bloc>();
+        for(int i = 0 ;i<this.capacite;i++){
+            b.add(new Bloc());
+        }
     }
 
     public int getCapacite() {

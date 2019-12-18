@@ -43,6 +43,10 @@ public class Table {
         return nom;
     }
 
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
     public List<String> getAtribut() {
         return atribut;
     }
