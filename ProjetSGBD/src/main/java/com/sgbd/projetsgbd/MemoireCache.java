@@ -16,7 +16,6 @@ public class MemoireCache {
 private List<Buffer> b;
 private int capacite;
 
-
     public MemoireCache(List<Buffer> b, int capacite) {
         this.b = b;
         this.capacite = capacite;
