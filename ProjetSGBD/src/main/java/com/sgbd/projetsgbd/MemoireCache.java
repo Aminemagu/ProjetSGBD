@@ -49,7 +49,7 @@ public class MemoireCache {
     
     public void chargeBuffer(Table R, int indice)
     {
-        //NE PAS OUBLIER DE VIDER LES LISTES
+        
         for(int i=0+indice; i < ( M+indice) -1 ;i++ ) //M-1 car on charge 3 buffer de la table R
         {
             if( R.getBlocs().size() < i ) 
@@ -66,9 +66,25 @@ public class MemoireCache {
         }
     }
     
-    public void chargeTousLesBuffer()
+    public void chargeTousLesBuffer(Table R, Table S)
     {
-        //chargeBuffer(R, 15)
+        //NE PAS OUBLIER DE VIDER LA LISTE (= BUFFER) APRES CHAQUE ITERATION
+        this.buffers.clear();
+        int taille_R = R.getBlocs().size();
+        int taille_S = S.getBlocs().size();
+        int indice_R = 0;
+        int indice_S = 0;
+        
+        while( (indice_R != taille_R) && (indice_S !=taille_S))
+        {
+            for(int i=0; i<taille_R; i++)
+            {
+                
+            }
+        }
+        
+        
+        //chargeBuffer(R)
         //chargeDernierBuffer(S)
     }
 
