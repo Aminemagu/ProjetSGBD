@@ -49,21 +49,34 @@ public class MemoireCache {
     
     public void chargeBuffer(Table R, int indice)
     {
-        
-        for(int i=0+indice; i < ( M+indice) -1 ;i++ ) //M-1 car on charge 3 buffer de la table R
-        {
-            if( R.getBlocs().size() < i ) 
-                this.buffers.get(i).getB().add(R.getBlocs().get(i));
+        System.out.println("Chargement buffer R ");
+        for(int i =0 ;i<this.M-1;i++){
+            for(int j =0 ;j<this.buffers.get(i).getCapacite();j++){
+                if(indice<R.getBlocs().size()){
+                    System.out.println(""+indice);
+                    this.buffers.get(this.M-1).getB().add(R.getBlocs().get(indice));
+                    indice = indice+1;
+                    System.out.println("blocs chrager");
+             }
+            }
         }
+        System.out.println("buffer charger");
         
     }
     
     public void chargeDernierBuffer(Table S, int indice)
     {
-        if( S.getBlocs().size() < indice )
-        {
-            this.buffers.get(this.M-1).getB().add(S.getBlocs().get(0));
+        System.out.println("Chargement buffer S ");
+        for(int i =0 ;i<this.buffers.get(M-1).getCapacite();i++){
+            
+            if(indice<S.getBlocs().size()){
+                System.out.println(""+indice);
+                this.buffers.get(this.M-1).getB().add(S.getBlocs().get(indice));
+                indice = indice+1;
+                System.out.println("blocs chrager");
+            }
         }
+        System.out.println("buffer charger");
     }
     
     public void chargeTousLesBuffer(Table R, Table S)
@@ -77,9 +90,11 @@ public class MemoireCache {
         
         while( (indice_R != taille_R) && (indice_S !=taille_S))
         {
-            for(int i=0; i<taille_R; i++)
+            for(int i=0; i<taille_R; i++) //parcourir table R
             {
-                
+                this.buffers.clear();
+                chargeBuffer(R, indice_R );
+                chargeDernierBuffer(S,indice_S);
             }
         }
         

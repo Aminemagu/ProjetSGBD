@@ -41,6 +41,10 @@ public class Bloc {
     public void setLignes(List<Ligne> l) {
         this.lignes = l;
     }
+    public int getNbLigneParBloc(){
+        int nb = (int)taille/this.lignes.get(0).getTaille();
+        return nb;
+    }
 
     public int getFreespace() {
         int used_space = 0;

@@ -22,22 +22,21 @@ public class App extends javax.swing.JFrame {
 
     private List<Table> lestables;
     private MemoireCache memCache;
-    
 
     /**
      * Creates new form App
      */
     public App() {
         initComponents();
-        this.memCache=new MemoireCache();
+        this.memCache = new MemoireCache();
         setTitle("Arnaud BD");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.lestables = new ArrayList<Table>();
         this.lestables.add(genereTable1());
         this.lestables.add(genereTable2());
-        Table R= lestables.get(0);
-        Table S= lestables.get(1);
-        this.lestables.add(ProduitCartesien(R,"ville",S,"Ville"));
+        Table R = lestables.get(0);
+        Table S = lestables.get(1);
+        this.lestables.add(ProduitCartesien(R, "ville", S, "Ville"));
         afficheTable(lestables, "Etudiant");
 
     }
@@ -66,7 +65,7 @@ public class App extends javax.swing.JFrame {
         l3.add("Arnaud");
         l3.add("Dijon");
         tableR.insertLigne(l3);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             List<String> l4 = new ArrayList<String>();
             l4.add("" + (i + 20));
             l4.add("Arnaud");
@@ -75,8 +74,6 @@ public class App extends javax.swing.JFrame {
         }
         System.out.println(tableR.toString());
         return tableR;
-        
-      
 
     }
 
@@ -91,7 +88,7 @@ public class App extends javax.swing.JFrame {
 
         Table tableR = new Table("Habitant", attribut);
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 10; i++) {
             List<String> l4 = new ArrayList<String>();
             l4.add("" + i);
             l4.add(generate(6));
@@ -136,7 +133,6 @@ public class App extends javax.swing.JFrame {
                 jScrollPane2 = new javax.swing.JScrollPane();
                 jList1 = new javax.swing.JList<>();
 
-
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
                 JTable tableau = new JTable(donnees, entetes);
@@ -172,8 +168,6 @@ public class App extends javax.swing.JFrame {
 
                 getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-               
-
                 pack();
             } else {
                 System.out.println("com.sgbd.projetsgbd.App.afficheTable()");
@@ -197,7 +191,7 @@ public class App extends javax.swing.JFrame {
         JList list = (JList) evt.getSource();
         String s = (String) list.getSelectedValue();
         System.out.println("" + s);
-         afficheTable(lestables, s);
+        afficheTable(lestables, s);
     }
 
     /**
@@ -262,26 +256,50 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
 
     private Table ProduitCartesien(Table R, String a, Table S, String b) {
-       
-        Table res = genereTableJoin(R, a, S, b);
-        String nomTable = "RESCART"+R.getNom()+"U"+S.getNom()+a;
-        res.setNom(nomTable);
-        
-        
 
+        Table res = genereTableJoin(R, a, S, b);
+        String nomTable = "RESCART" + R.getNom() + "U" + S.getNom() + a;
+        res.setNom(nomTable);
+        int nbBlocksParBuffer = memCache.getBuffers().get(0).getCapacite();
+        int nbBlocksPourBufferR = (memCache.getBuffers().get(0).getCapacite() * (memCache.getM() - 1));
+        int nbLignePBlocsR = R.getBlocs().get(0).getNbLigneParBloc();
+        int nbLignePBlocsS = S.getBlocs().get(0).getNbLigneParBloc();
+        for (int i = 0; i < S.getBlocs().size(); i = i + nbBlocksParBuffer) {
+            this.memCache.chargeDernierBuffer(S, i);
+            for (int j = 0; j < R.getBlocs().size(); j = j + nbBlocksPourBufferR) {
+                this.memCache.chargeBuffer(R, j);
+
+                for (int buffR = 0; buffR < memCache.getM() - 1; buffR++) {
+                    for (int blR = 0; blR < nbBlocksParBuffer; blR++) {
+                        for (int liR = 0; liR < nbLignePBlocsR; liR++) {
+                            System.out.println("[" + buffR + "][" + blR + "][+" + liR + "]");
+                            for (int blS = 0; blS < nbBlocksParBuffer; blS++) {
+                                for (int liS = 0; liS < nbLignePBlocsS; liS++) {
+                                    /*System.out.println("[" + buffR + "][" + blR + "][+" + liR + "]");
+                                    System.out.println("Union");
+                                    System.out.println("[il est seul][" + blS + "][+" + liS + "]");*/
+                                    Bloc lS = this.memCache.getBuffers().get(memCache.getM() - 1).getB().get(blS);/*.getLignes().get(liS);
+                                   /* Ligne lR = this.memCache.getBuffers().get(buffR).getB().get(blR).getLignes().get(liR);
+                                    System.out.println(lR.toString()+" U " +lS.toString());*/
+                                    System.out.println(lS.toString());                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
         return res;
     }
-    
-
 
     private Table genereTableJoin(Table R, String a, Table S, String b) {
         List<String> attributNewTable = new ArrayList<String>();
-        for (int i=0;i<R.getAtribut().size();i++){
+        for (int i = 0; i < R.getAtribut().size(); i++) {
             attributNewTable.add(R.getAtribut().get(i));
             System.out.println(R.getAtribut().get(i));
         }
-        for (int i=0;i<S.getAtribut().size();i++){
-            if(!(S.getAtribut().get(i).equals(b))){
+        for (int i = 0; i < S.getAtribut().size(); i++) {
+            if (!(S.getAtribut().get(i).equals(b))) {
                 attributNewTable.add(S.getAtribut().get(i));
                 System.out.println(S.getAtribut().get(i));
             }
@@ -290,7 +308,5 @@ public class App extends javax.swing.JFrame {
         Table res = new Table("RES", attributNewTable);
         return res;
     }
-    
-    
-    
+
 }

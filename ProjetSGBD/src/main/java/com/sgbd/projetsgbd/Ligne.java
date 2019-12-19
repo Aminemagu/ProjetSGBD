@@ -17,7 +17,7 @@ public class Ligne {
 
     public Ligne(List<String> attribut) {
         this.attribut = attribut;
-        this.taille = 40;
+        this.taille = 2000;
     }
 
     public List<String> getAttribut() {
