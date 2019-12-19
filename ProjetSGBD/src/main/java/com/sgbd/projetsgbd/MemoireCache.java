@@ -43,16 +43,34 @@ public class MemoireCache {
         this.M = M;
     }
 
-    /*void chargeBufferCart(Table R, Table S) {
+    
+    
+    // J AI FAIT COMME SI UN BUFFER CHARGEAIT UN BLOC ALORS QU'IL PEUT EN CHARGER 3 NORMALEMENT
+    
+    public void chargeBuffer(Table R, int indice)
+    {
+        //NE PAS OUBLIER DE VIDER LES LISTES
+        for(int i=0+indice; i < ( M+indice) -1 ;i++ ) //M-1 car on charge 3 buffer de la table R
+        {
+            if( R.getBlocs().size() < i ) 
+                this.buffers.get(i).getB().add(R.getBlocs().get(i));
+        }
         
-        for(int i=0; i<this.M;i++)
-        {//on ajoute tous les blocs de R 
-            this.buffers.add(R.getBlocs().get(i));
-                    }
-        //le dernier 
-    }*/
+    }
     
+    public void chargeDernierBuffer(Table S, int indice)
+    {
+        if( S.getBlocs().size() < indice )
+        {
+            this.buffers.get(this.M-1).getB().add(S.getBlocs().get(0));
+        }
+    }
     
+    public void chargeTousLesBuffer()
+    {
+        //chargeBuffer(R, 15)
+        //chargeDernierBuffer(S)
+    }
 
 
 }
