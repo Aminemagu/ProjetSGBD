@@ -42,4 +42,15 @@ public class Buffer {
     }
     
     
+    public String toString()
+    {
+        String s = "";
+        for(int i=0; i <capacite;i++)
+        {
+            s+=this.b.get(i).toString();
+        }    
+        
+        return s;
+    }
+    
 }

@@ -54,13 +54,14 @@ public class Table {
     public void setIndexes(List<Indexes> indexes) {
         this.indexes = indexes;
     }
-
+    
+    //méthode pour insérer les lignes dans les blocs selon leurs capacitées
     void insertLigne(List<String> l1) {
         Ligne l = new Ligne(l1);
         if (l1.size() != this.attribut.size()){
             System.out.println("La ligne n'a pas le bon nombre d'attribut");
         }else{
-            if(blocs.get(blocs.size()-1).getFreespace() > l.getTaille()){//si dernier bloc n'est pas plien
+            if(blocs.get(blocs.size()-1).getFreespace() > l.getTaille()){ //si dernier bloc n'est pas plein
                     blocs.get(blocs.size()-1).getLignes().add(l);
             }else{
                 blocs.add(new Bloc());

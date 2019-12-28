@@ -23,6 +23,7 @@ public class Appli extends javax.swing.JFrame {
     public Appli() {
         initComponents();
         this.memCache = new MemoireCache();
+        
         setTitle("Base de donnée");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.lestables = new ArrayList<Table>();
@@ -34,7 +35,7 @@ public class Appli extends javax.swing.JFrame {
         
         this.lestables.add(genereTableR());
         this.lestables.add(genereTableS());
-        this.lestables.add(ProduitCartesien(lestables.get(2), "ID", lestables.get(3),"ID"));
+        this.lestables.add(ProduitCartesien(lestables.get(3), "Ville", lestables.get(4),"Ville"));
         
         initJList();
     }
@@ -295,7 +296,7 @@ public class Appli extends javax.swing.JFrame {
             }
         }
 
-        Table res = new Table("RES", attributNewTable);
+        Table res = new Table("res", attributNewTable);
         return res;
     }
     
@@ -308,6 +309,7 @@ public class Appli extends javax.swing.JFrame {
         int nbBlocksPourBufferR = (memCache.getBuffers().get(0).getCapacite() * (memCache.getM() - 1));
         int nbLignePBlocsR = R.getBlocs().get(0).getNbLigneParBloc();
         int nbLignePBlocsS = S.getBlocs().get(0).getNbLigneParBloc();
+        
         for (int i = 0; i < S.getBlocs().size(); i = i + nbBlocksParBuffer) {
             this.memCache.chargeDernierBuffer(S, i);
             for (int j = 0; j < R.getBlocs().size(); j = j + nbBlocksPourBufferR) {
@@ -319,13 +321,10 @@ public class Appli extends javax.swing.JFrame {
                             System.out.println("[" + buffR + "][" + blR + "][+" + liR + "]");
                             for (int blS = 0; blS < nbBlocksParBuffer; blS++) {
                                 for (int liS = 0; liS < nbLignePBlocsS; liS++) {
-                                    /*System.out.println("[" + buffR + "][" + blR + "][+" + liR + "]");
-                                    System.out.println("Union");
-                                    System.out.println("[il est seul][" + blS + "][+" + liS + "]");*/
-                                    Bloc lS = this.memCache.getBuffers().get(memCache.getM() - 1).getB().get(blS);/*.getLignes().get(liS);
-                                   /* Ligne lR = this.memCache.getBuffers().get(buffR).getB().get(blR).getLignes().get(liR);
-                                    System.out.println(lR.toString()+" U " +lS.toString());*/
-                                    System.out.println(lS.toString());                                }
+                                    
+                                    Bloc lS = this.memCache.getBuffers().get(memCache.getM() - 1).getB().get(blS);
+                               
+                                }
                             }
                         }
 
