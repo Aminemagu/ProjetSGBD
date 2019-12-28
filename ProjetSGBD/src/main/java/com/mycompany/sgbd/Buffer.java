@@ -20,9 +20,7 @@ public class Buffer {
     public Buffer(){
         this.capacite=3;
         this.b = new ArrayList<Bloc>();
-        for(int i = 0 ;i<this.capacite;i++){
-            b.add(new Bloc());
-        }
+        
     }
 
     public int getCapacite() {
@@ -45,7 +43,7 @@ public class Buffer {
     public String toString()
     {
         String s = "";
-        for(int i=0; i <capacite;i++)
+        for(int i=0; i <this.getB().size();i++)
         {
             s+=this.b.get(i).toString();
         }    

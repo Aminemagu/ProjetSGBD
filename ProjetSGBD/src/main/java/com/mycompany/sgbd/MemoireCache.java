@@ -64,7 +64,7 @@ public class MemoireCache {
                     }
                     
                 }
-                //System.out.println(this.getBuffers().get(i).getB().toString());
+                
             }
             
         }
@@ -74,14 +74,14 @@ public class MemoireCache {
     public void chargeDernierBuffer(Table S)
     {
         System.out.println("Chargement buffer S ");
-        for(int i =0 ;i<3;i++){
+        for(int i =0 ;i<3;i++){ //parcours blocs
             System.out.println("i="+i);
             if(this.indiceS<S.getBlocs().size()){
                 this.getBuffers().get(this.getM()-1).getB().add(S.getBlocs().get(this.indiceS));
                 this.indiceS = this.indiceS+1;
             }           
         }
-        //System.out.println(this.getBuffers().get(this.getM()-1).getB().toString());
+        
     }
     
     
@@ -99,6 +99,7 @@ public class MemoireCache {
                 this.getBuffers().clear();
                 chargeBuffer(R);
                 chargeDernierBuffer(S);
+                this.toString();
             }
         }
         
@@ -111,7 +112,7 @@ public class MemoireCache {
     {
         String s="";
         for(int i=0;i<this.getBuffers().size(); i++)
-            s+= "Buffer "+i+" : "+this.getBuffers().get(i).toString()+"\n";
+            s+= "Buffer "+i+" (taille : "+this.getBuffers().get(i).getB().size()+ ") : "+this.getBuffers().get(i).toString()+"\n";
         return s;
     }
 

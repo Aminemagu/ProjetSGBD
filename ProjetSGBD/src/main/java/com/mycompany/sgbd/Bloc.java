@@ -57,13 +57,13 @@ public class Bloc {
     @Override
     public String toString() {
        
-        String res = "blocs {\n" ;
+        String res = "bloc {\n" ;
         for (int i =0 ; i<lignes.size();i++){
            res += "\t\t"+ i + " : " + lignes.get(i).toString()+ "\n";
         } 
         res +="\t}";
         
-        return res;
+        return res+"\n";
     }
     
     

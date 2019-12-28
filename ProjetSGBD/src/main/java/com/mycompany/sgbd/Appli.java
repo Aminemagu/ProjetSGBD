@@ -31,14 +31,16 @@ public class Appli extends javax.swing.JFrame {
         this.lestables.add(genereTable2());
         Table R = lestables.get(0);
         Table S = lestables.get(1);
-        this.lestables.add(ProduitCartesien(R, "ville", S, "Ville"));
+        //this.lestables.add(ProduitCartesien(R, "ville", S, "Ville"));
         
         this.lestables.add(genereTableR());
         this.lestables.add(genereTableS());
-        this.lestables.add(ProduitCartesien(lestables.get(3), "Ville", lestables.get(4),"Ville"));
+        //this.lestables.add(ProduitCartesien(lestables.get(3), "Ville", lestables.get(4),"Ville"));
         
-        //memCache.chargeTousLesBuffer(lestables.get(0), lestables.get(1));
+        memCache.chargeBuffer(lestables.get(0));
         System.out.println(memCache.toString());
+        
+        
         initJList();
     }
 
