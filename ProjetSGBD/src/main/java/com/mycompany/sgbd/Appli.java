@@ -37,6 +37,8 @@ public class Appli extends javax.swing.JFrame {
         this.lestables.add(genereTableS());
         this.lestables.add(ProduitCartesien(lestables.get(3), "Ville", lestables.get(4),"Ville"));
         
+        //memCache.chargeTousLesBuffer(lestables.get(0), lestables.get(1));
+        System.out.println(memCache.toString());
         initJList();
     }
 
@@ -303,7 +305,7 @@ public class Appli extends javax.swing.JFrame {
     private Table ProduitCartesien(Table R, String a, Table S, String b) {
 
         Table res = genereTableJoin(R, a, S, b);
-        String nomTable = "ResProduitCarth_" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
+        String nomTable = "ResProduitCart_" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
         res.setNom(nomTable);
         int nbBlocksParBuffer = memCache.getBuffers().get(0).getCapacite();
         int nbBlocksPourBufferR = (memCache.getBuffers().get(0).getCapacite() * (memCache.getM() - 1));
@@ -311,9 +313,9 @@ public class Appli extends javax.swing.JFrame {
         int nbLignePBlocsS = S.getBlocs().get(0).getNbLigneParBloc();
         
         for (int i = 0; i < S.getBlocs().size(); i = i + nbBlocksParBuffer) {
-            this.memCache.chargeDernierBuffer(S, i);
+            //this.memCache.chargeDernierBuffer(S, i);
             for (int j = 0; j < R.getBlocs().size(); j = j + nbBlocksPourBufferR) {
-                this.memCache.chargeBuffer(R, j);
+                //this.memCache.chargeBuffer(R, j);
 
                 for (int buffR = 0; buffR < memCache.getM() - 1; buffR++) {
                     for (int blR = 0; blR < nbBlocksParBuffer; blR++) {
@@ -332,6 +334,20 @@ public class Appli extends javax.swing.JFrame {
                 }
             }
         }
+        return res;
+    }
+    
+    
+    
+    private Table ProduitCart(Table R, String a, Table S, String b)
+    {
+        Table res = genereTableJoin(R, a, S, b);
+        String nomTable = "ResProduitCart_" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
+        res.setNom(nomTable);
+        
+        
+        
+        
         return res;
     }
     
@@ -373,6 +389,12 @@ public class Appli extends javax.swing.JFrame {
         def_table = new DefaultTableModel(donnees, entetes);
         jTable1.setModel(def_table);
     }
+    
+    
+    
+    
+    
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
