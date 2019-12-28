@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sgbd.projetsgbd;
+package com.mycompany.sgbd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,11 @@ public class Table {
     private List<Bloc> blocs;
     private String nom;
     private List<Indexes> indexes;
-    private List<String> atribut;
+    private List<String> attribut;
     
 
     public Table(String n,List<String> l) {
-        this.atribut = l;
+        this.attribut = l;
         this.nom = n;
         this.blocs = new ArrayList<Bloc>();
         this.blocs.add(new Bloc());
@@ -47,8 +47,8 @@ public class Table {
         this.nom = nom;
     }
 
-    public List<String> getAtribut() {
-        return atribut;
+    public List<String> getAttribut() {
+        return attribut;
     }
 
     public void setIndexes(List<Indexes> indexes) {
@@ -57,7 +57,7 @@ public class Table {
 
     void insertLigne(List<String> l1) {
         Ligne l = new Ligne(l1);
-        if (l1.size() != this.atribut.size()){
+        if (l1.size() != this.attribut.size()){
             System.out.println("La ligne n'a pas le bon nombre d'attribut");
         }else{
             if(blocs.get(blocs.size()-1).getFreespace() > l.getTaille()){//si dernier bloc n'est pas plien
