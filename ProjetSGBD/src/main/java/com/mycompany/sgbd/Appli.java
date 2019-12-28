@@ -37,7 +37,7 @@ public class Appli extends javax.swing.JFrame {
         this.lestables.add(genereTableS());
         //this.lestables.add(ProduitCartesien(lestables.get(3), "Ville", lestables.get(4),"Ville"));
         
-        memCache.chargeBuffer(lestables.get(0));
+        memCache.chargeDernierBuffer(lestables.get(3));
         System.out.println(memCache.toString());
         
         
