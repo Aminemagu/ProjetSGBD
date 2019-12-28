@@ -45,7 +45,7 @@ public class MemoireCache {
 
     
     
-    // J AI FAIT COMME SI UN BUFFER CHARGEAIT UN BLOC ALORS QU'IL PEUT EN CHARGER 3 NORMALEMENT
+    // FAIRE COMME SI UN BUFFER CHARGEAIT UN BLOC ALORS QU'IL PEUT EN CHARGER 3 NORMALEMENT
     
     public void chargeBuffer(Table R, int indice)
     {
@@ -53,10 +53,10 @@ public class MemoireCache {
         for(int i =0 ;i<this.M-1;i++){
             for(int j =0 ;j<this.buffers.get(i).getCapacite();j++){
                 if(indice<R.getBlocs().size()){
-                    System.out.println(""+indice);
+                    System.out.println("i="+indice);
                     this.buffers.get(this.M-1).getB().add(R.getBlocs().get(indice));
                     indice = indice+1;
-                    System.out.println("blocs chrager");
+                    System.out.println("bloc chargé");
              }
             }
         }
@@ -70,13 +70,13 @@ public class MemoireCache {
         for(int i =0 ;i<this.buffers.get(M-1).getCapacite();i++){
             
             if(indice<S.getBlocs().size()){
-                System.out.println(""+indice);
+                System.out.println("i="+indice);
                 this.buffers.get(this.M-1).getB().add(S.getBlocs().get(indice));
                 indice = indice+1;
-                System.out.println("blocs chrager");
+                System.out.println("bloc chargé");
             }
         }
-        System.out.println("buffer charger");
+        System.out.println("buffers chargés");
     }
     
     public void chargeTousLesBuffer(Table R, Table S)

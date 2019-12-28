@@ -23,7 +23,7 @@ public class Appli extends javax.swing.JFrame {
     public Appli() {
         initComponents();
         this.memCache = new MemoireCache();
-        setTitle("Arnaud BD");
+        setTitle("Base de donnée");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.lestables = new ArrayList<Table>();
         this.lestables.add(genereTable1());
@@ -31,7 +31,11 @@ public class Appli extends javax.swing.JFrame {
         Table R = lestables.get(0);
         Table S = lestables.get(1);
         this.lestables.add(ProduitCartesien(R, "ville", S, "Ville"));
-        //afficheTable(lestables, "Etudiant");
+        
+        this.lestables.add(genereTableR());
+        this.lestables.add(genereTableS());
+        this.lestables.add(ProduitCartesien(lestables.get(2), "ID", lestables.get(3),"ID"));
+        
         initJList();
     }
 
@@ -182,7 +186,7 @@ public class Appli extends javax.swing.JFrame {
             l4.add("Dijon");
             tableR.insertLigne(l4);
         }
-        System.out.println(tableR.toString());
+        //System.out.println(tableR.toString());
         return tableR;
 
     }
@@ -207,9 +211,64 @@ public class Appli extends javax.swing.JFrame {
             l4.add("" + ((int) (Math.random() * 100)));
             tableR.insertLigne(l4);
         }
-        System.out.println(tableR.toString());
+        //System.out.println(tableR.toString());
         return tableR;
 
+    }
+    
+    
+    public Table genereTableR()
+    {
+        List<String> attribut = new ArrayList<String>();
+        attribut.add("ID");
+        attribut.add("Ville");
+        
+        Table tableR = new Table("TableR", attribut);
+        
+        List<String> l1 = new ArrayList<>();
+        l1.add("12");
+        l1.add("Dijon");
+        tableR.insertLigne(l1);
+        
+        List<String> l2 = new ArrayList<>();
+        l2.add("13");
+        l2.add("Macon");
+        tableR.insertLigne(l2);
+        
+        List<String> l3 = new ArrayList<String>();
+        l3.add("14");
+        l3.add("Besancon");
+        tableR.insertLigne(l3);
+        
+        System.out.println(tableR.toString());
+        return tableR;
+    }
+    
+    public Table genereTableS()
+    {
+        List<String> attribut = new ArrayList<String>();
+        attribut.add("ID");
+        attribut.add("Ville");
+        
+        Table tableS = new Table("TableS", attribut);
+        
+        List<String> l1 = new ArrayList<>();
+        l1.add("15");
+        l1.add("Macon");
+        tableS.insertLigne(l1);
+        
+        List<String> l2 = new ArrayList<>();
+        l2.add("16");
+        l2.add("Macon");
+        tableS.insertLigne(l2);
+        
+        List<String> l3 = new ArrayList<String>();
+        l3.add("17");
+        l3.add("Dijon");
+        tableS.insertLigne(l3);
+        
+        System.out.println(tableS.toString());
+        return tableS;
     }
     
     public static String generate(int length) {
