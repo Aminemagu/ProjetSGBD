@@ -26,9 +26,6 @@ public class MemoireCache {
         this.indiceS = 0;
         this.indiceR = 0;
         this.buffersR =new ArrayList<Buffer>();
-        for(int i = 0 ;i<this.M-1;i++){
-            buffersR.add(new Buffer());
-        }
         this.bufferS = new Buffer();
         
     }
@@ -58,19 +55,14 @@ public class MemoireCache {
     public void chargeBuffer(Table R)
     {
         System.out.println("Chargement buffer R ");
-        for(int i =0 ; i<this.getM();i++){  // M
-            
-            if( !this.getBuffersR().isEmpty() )
-            {
-                System.out.println("i="+i);
-                for(int j =0 ;j<3;j++){ //capacite en bloc du buffer
-                    
-                    if(this.indiceR<R.getBlocs().size()){
-                        this.getBuffersR().get(i).getB().add(R.getBlocs().get(this.indiceR));
-                        this.indiceR = this.indiceR+1;
-                    }                   
-                }               
-            }           
+        for(int i =0 ; i<this.getM()-1;i++){  // M
+            this.buffersR.add(new Buffer());
+            for(int j =0 ;j<3;j++){ //capacite en bloc du buffer = 3 
+                if(this.indiceR<R.getBlocs().size()){
+                    this.getBuffersR().get(i).getB().add(R.getBlocs().get(this.indiceR));
+                    this.indiceR = this.indiceR+1;
+                }                   
+            }                          
         }        
     }
     

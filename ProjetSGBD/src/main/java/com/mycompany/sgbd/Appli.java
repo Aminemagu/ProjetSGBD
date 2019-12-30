@@ -47,8 +47,12 @@ public class Appli extends javax.swing.JFrame {
         memCache.chargeDernierBuffer(lestables.get(0));
         System.out.println(memCache.toString());
         */
-        memCache.pos_attr_joint = 1;;
-        ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville");
+        
+        //memCache.pos_attr_joint = 1;;
+        //ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville");
+        memCache.chargeBuffer(this.lestables.get(1));
+        System.out.println(memCache.toString());
+        
         
         initJList();
     }
