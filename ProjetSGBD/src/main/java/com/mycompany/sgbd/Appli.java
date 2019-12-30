@@ -37,7 +37,13 @@ public class Appli extends javax.swing.JFrame {
         this.lestables.add(genereTableS());
         //this.lestables.add(ProduitCartesien(lestables.get(3), "Ville", lestables.get(4),"Ville"));
         
-        memCache.chargeDernierBuffer(lestables.get(3));
+        memCache.chargeDernierBuffer(lestables.get(0));
+        System.out.println(memCache.toString());
+        
+        memCache.getBufferS().getB().clear();
+        System.out.println(memCache.toString());
+        
+        memCache.chargeDernierBuffer(lestables.get(0));
         System.out.println(memCache.toString());
         
         
@@ -304,7 +310,7 @@ public class Appli extends javax.swing.JFrame {
         return res;
     }
     
-    private Table ProduitCartesien(Table R, String a, Table S, String b) {
+    /*private Table ProduitCartesien(Table R, String a, Table S, String b) {
 
         Table res = genereTableJoin(R, a, S, b);
         String nomTable = "ResProduitCart_" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
@@ -337,7 +343,7 @@ public class Appli extends javax.swing.JFrame {
             }
         }
         return res;
-    }
+    }*/
     
     
     
