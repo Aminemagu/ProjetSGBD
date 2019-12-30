@@ -12,20 +12,20 @@ import java.util.List;
  * @author tb985403
  */
 public class Ligne {
-    private List<String> attribut ;
+    private List<String> attributs ;
     private int taille;
 
     public Ligne(List<String> attribut) {
-        this.attribut = attribut;
+        this.attributs = attribut;
         this.taille = 2000;
     }
 
-    public List<String> getAttribut() {
-        return attribut;
+    public List<String> getAttributs() {
+        return attributs;
     }
 
-    public void setAttribut(List<String> attribut) {
-        this.attribut = attribut;
+    public void setAttributs(List<String> attribut) {
+        this.attributs = attribut;
     }
 
     public int getTaille() {
@@ -39,8 +39,8 @@ public class Ligne {
     @Override
     public String toString() {
         String res = "\tLigne{\n" ;
-        for (int i =0 ; i<attribut.size();i++){
-           res +="\t\t\t" +i + " : " + attribut.get(i)+"\n" ;
+        for (int i =0 ; i<attributs.size();i++){
+           res +="\t\t\t" +i + " : " + attributs.get(i)+"\n" ;
         } 
         res +="\t\t}";
         

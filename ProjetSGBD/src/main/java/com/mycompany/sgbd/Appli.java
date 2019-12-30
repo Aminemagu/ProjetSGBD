@@ -168,12 +168,12 @@ public class Appli extends javax.swing.JFrame {
     
     public Table genereTable1() {
 
-        List<String> attribut = new ArrayList<String>();
-        attribut.add("id_etu");
-        attribut.add("nom");
-        attribut.add("ville");
+        List<String> attributs = new ArrayList<String>();
+        attributs.add("id_etu");
+        attributs.add("nom");
+        attributs.add("ville");
 
-        Table tableR = new Table("Etudiant", attribut);
+        Table tableR = new Table("Etudiant", attributs);
 
         List<String> l1 = new ArrayList<>();
         l1.add("12");
@@ -204,14 +204,14 @@ public class Appli extends javax.swing.JFrame {
     
     public Table genereTable2() {
 
-        List<String> attribut = new ArrayList<String>();
-        attribut.add("id_hab");
-        attribut.add("nom");
-        attribut.add("Prenom");
-        attribut.add("Ville");
-        attribut.add("age");
+        List<String> attributs = new ArrayList<String>();
+        attributs.add("id_hab");
+        attributs.add("nom");
+        attributs.add("Prenom");
+        attributs.add("Ville");
+        attributs.add("age");
 
-        Table tableR = new Table("Habitant", attribut);
+        Table tableR = new Table("Habitant", attributs);
 
         for (int i = 0; i < 10; i++) {
             List<String> l4 = new ArrayList<String>();
@@ -230,11 +230,11 @@ public class Appli extends javax.swing.JFrame {
     
     public Table genereTableR()
     {
-        List<String> attribut = new ArrayList<String>();
-        attribut.add("ID");
-        attribut.add("Ville");
+        List<String> attributs = new ArrayList<String>();
+        attributs.add("ID");
+        attributs.add("Ville");
         
-        Table tableR = new Table("TableR", attribut);
+        Table tableR = new Table("TableR", attributs);
         
         List<String> l1 = new ArrayList<>();
         l1.add("12");
@@ -257,11 +257,11 @@ public class Appli extends javax.swing.JFrame {
     
     public Table genereTableS()
     {
-        List<String> attribut = new ArrayList<String>();
-        attribut.add("ID");
-        attribut.add("Ville");
+        List<String> attributs = new ArrayList<String>();
+        attributs.add("ID");
+        attributs.add("Ville");
         
-        Table tableS = new Table("TableS", attribut);
+        Table tableS = new Table("TableS", attributs);
         
         List<String> l1 = new ArrayList<>();
         l1.add("15");
@@ -353,6 +353,19 @@ public class Appli extends javax.swing.JFrame {
         String nomTable = "ResProduitCart_" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
         res.setNom(nomTable);
         
+        while (!memCache.getBufferS().getB().isEmpty() )
+        {
+            memCache.getBufferS().getB().clear(); // flush du bufferS
+            memCache.chargeDernierBuffer(S); //charge du bufferS
+            
+            while(!memCache.getBuffersR().isEmpty())
+            {
+                memCache.getBuffersR().clear(); //flush des buffersR
+                memCache.chargeBuffer(R); // charge des buffersR
+                //methode parcours buff
+                
+            }
+        }
         
         
         
@@ -387,7 +400,7 @@ public class Appli extends javax.swing.JFrame {
                     for (int j = 0; j < aAffiche.getBlocs().get(i).getLignes().size(); j++) {
                         for (int k = 0; k < t1attrib.size(); k++) {
 
-                            donnees[numLigne][k] = aAffiche.getBlocs().get(i).getLignes().get(j).getAttribut().get(k);
+                            donnees[numLigne][k] = aAffiche.getBlocs().get(i).getLignes().get(j).getAttributs().get(k);
                         }
                         numLigne++;
                     }

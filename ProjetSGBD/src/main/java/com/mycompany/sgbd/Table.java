@@ -16,11 +16,11 @@ public class Table {
     private List<Bloc> blocs;
     private String nom;
     private List<Indexes> indexes;
-    private List<String> attribut;
+    private List<String> attributs;
     
 
     public Table(String n,List<String> l) {
-        this.attribut = l;
+        this.attributs = l;
         this.nom = n;
         this.blocs = new ArrayList<Bloc>();
         this.blocs.add(new Bloc());
@@ -48,7 +48,7 @@ public class Table {
     }
 
     public List<String> getAttribut() {
-        return attribut;
+        return attributs;
     }
 
     public void setIndexes(List<Indexes> indexes) {
@@ -58,7 +58,7 @@ public class Table {
     //méthode pour insérer les lignes dans les blocs selon leurs capacitées
     void insertLigne(List<String> l1) {
         Ligne l = new Ligne(l1);
-        if (l1.size() != this.attribut.size()){
+        if (l1.size() != this.attributs.size()){
             System.out.println("La ligne n'a pas le bon nombre d'attribut");
         }else{
             if(blocs.get(blocs.size()-1).getFreespace() > l.getTaille()){ //si dernier bloc n'est pas plein

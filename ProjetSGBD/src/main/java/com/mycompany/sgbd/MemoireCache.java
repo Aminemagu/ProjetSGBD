@@ -86,10 +86,55 @@ public class MemoireCache {
         
     }
     
-    public void videDernierBuffer()
+    public void parcoursMem()
     {
-        System.out.println("Flush buffer S ");
+        for(int i=0; i<bufferS.getB().size();i++) //bufferR
+        {
+            for(int j=0; j<buffersR.size();j++) //taille buffersR
+            {
+                for(int k=0; k<buffersR.get(i).getB().size();k++) //nombre de blocs de buffersR.get(i)
+                {
+                    //parcoursLignes(.. , ..);
+                }
+            }
+        }
+    }
+    
+    public void parcoursLignes(Bloc s, Bloc r) //on mettra les indices
+    {
+        for(int i=0; i< s.getLignes().size();i++)
+        {
+            Ligne ls = s.getLignes().get(i);
+            for(int j=0; j< r.getLignes().size();j++)
+            {
+                Ligne lr = r.getLignes().get(j);
+                //parcoursCase(.., ..);
+            }
+        }
+    }
+    
+    // il faut que les 2 tables aient la meme structure
+    //c.à.d l'attribut R.a et S.a ont meme pos dans la table R et S
+    public void parcoursCase(Ligne ls, Ligne lr, int pos_attr_joint)
+    {
+        if (ls.getAttributs().get(pos_attr_joint) == ls.getAttributs().get(pos_attr_joint))
+        {
+            List attr_res = new ArrayList<String>();
+            for(int i=0; i< ls.getAttributs().size(); i++)
+            {
+                 attr_res.add(ls.getAttributs().get(i));
+            }
+            
+            for(int j=0; j< lr.getAttributs().size(); j++)
+            {
+                if(lr.getAttributs().get(pos_attr_joint) != lr.getAttributs().get(j)) 
+                    attr_res.add(lr.getAttributs().get(j));
+            }
+            
+            //return Ligne res 
+        }
         
+        //return null
     }
     
     
