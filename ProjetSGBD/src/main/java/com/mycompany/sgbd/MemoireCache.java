@@ -56,12 +56,12 @@ public class MemoireCache {
     {
         System.out.println("Chargement buffer R ");
         for(int i =0 ; i<this.getM()-1;i++){  // M
-            this.buffersR.add(new Buffer());
             for(int j =0 ;j<3;j++){ //capacite en bloc du buffer = 3 
                 if(this.indiceR<R.getBlocs().size()){
+                    this.buffersR.add(new Buffer());
                     this.getBuffersR().get(i).getB().add(R.getBlocs().get(this.indiceR));
                     this.indiceR = this.indiceR+1;
-                }                   
+                }
             }                          
         }        
     }
@@ -70,7 +70,6 @@ public class MemoireCache {
     {
         System.out.println("Chargement buffer S ");
         for(int i =0 ;i<3;i++){ //parcours blocs
-            System.out.println("i="+i);
             if(this.indiceS<S.getBlocs().size()){
                 this.bufferS.getB().add(S.getBlocs().get(this.indiceS));
                 this.indiceS = this.indiceS+1;
@@ -89,7 +88,6 @@ public class MemoireCache {
                 
                 for(int k=0; k<buffersR.get(j).getB().size();k++) //nombre de blocs de buffersR.get(i)
                 {
-                    System.out.println("A");
                     parcoursLignes(bufferS.getB().get(i) , buffersR.get(j).getB().get(k));
                 }
             }

@@ -48,9 +48,8 @@ public class Appli extends javax.swing.JFrame {
         System.out.println(memCache.toString());
         */
         
-        //memCache.pos_attr_joint = 1;;
-        //ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville");
-        memCache.chargeBuffer(this.lestables.get(1));
+        memCache.pos_attr_joint = 1;;
+        ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville");
         System.out.println(memCache.toString());
         
         
@@ -371,7 +370,7 @@ public class Appli extends javax.swing.JFrame {
                 memCache.chargeBuffer(R); // charge des buffersR
                 //methode parcours buff
                 memCache.parcoursMem();
-                
+                System.out.println(memCache.toString());
             }while(!memCache.getBuffersR().isEmpty());
             
         }while (!memCache.getBufferS().getB().isEmpty() );
