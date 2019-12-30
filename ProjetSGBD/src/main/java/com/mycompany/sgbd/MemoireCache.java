@@ -19,6 +19,7 @@ public class MemoireCache {
     private int M;
     protected int indiceR;
     protected int indiceS;
+    protected int pos_attr_joint;
 
     public MemoireCache() {
         this.M= 4;
@@ -88,13 +89,16 @@ public class MemoireCache {
     
     public void parcoursMem()
     {
+        
         for(int i=0; i<bufferS.getB().size();i++) //bufferR
         {
             for(int j=0; j<buffersR.size();j++) //taille buffersR
             {
-                for(int k=0; k<buffersR.get(i).getB().size();k++) //nombre de blocs de buffersR.get(i)
+                
+                for(int k=0; k<buffersR.get(j).getB().size();k++) //nombre de blocs de buffersR.get(i)
                 {
-                    //parcoursLignes(.. , ..);
+                    System.out.println("A");
+                    parcoursLignes(bufferS.getB().get(i) , buffersR.get(j).getB().get(k));
                 }
             }
         }
@@ -108,7 +112,7 @@ public class MemoireCache {
             for(int j=0; j< r.getLignes().size();j++)
             {
                 Ligne lr = r.getLignes().get(j);
-                //parcoursCase(.., ..);
+                parcoursCase(ls, lr, this.pos_attr_joint);
             }
         }
     }
@@ -123,14 +127,18 @@ public class MemoireCache {
             for(int i=0; i< ls.getAttributs().size(); i++)
             {
                  attr_res.add(ls.getAttributs().get(i));
+                 System.out.print(ls.getAttributs().get(i)+" | ");
             }
             
             for(int j=0; j< lr.getAttributs().size(); j++)
             {
-                if(lr.getAttributs().get(pos_attr_joint) != lr.getAttributs().get(j)) 
+                if(lr.getAttributs().get(pos_attr_joint) != lr.getAttributs().get(j))
+                {
                     attr_res.add(lr.getAttributs().get(j));
+                     System.out.print(lr.getAttributs().get(j)+" | ");
+                }                   
             }
-            
+            System.out.println("");           
             //return Ligne res 
         }
         
@@ -138,29 +146,6 @@ public class MemoireCache {
     }
     
     
-    /*public void chargeTousLesBuffer(Table R, Table S)
-    {
-        //NE PAS OUBLIER DE VIDER LA LISTE (= BUFFER) APRES CHAQUE ITERATION
-        this.getBuffers().clear();
-        int taille_R = R.getBlocs().size();
-        int taille_S = S.getBlocs().size();
-
-        while( (this.indiceR != taille_R) && (this.indiceS !=taille_S))
-        {
-            for(int i=0; i<taille_R; i++) //parcourir table R
-            {
-                this.getBuffers().clear();
-                chargeBuffer(R);
-                chargeDernierBuffer(S);
-                this.toString();
-            }
-        }
-        
-        
-        //chargeBuffer(R)
-        //chargeDernierBuffer(S)
-    }
-    */
     
     public String toString()
     {

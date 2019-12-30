@@ -37,6 +37,7 @@ public class Appli extends javax.swing.JFrame {
         this.lestables.add(genereTableS());
         //this.lestables.add(ProduitCartesien(lestables.get(3), "Ville", lestables.get(4),"Ville"));
         
+        /*
         memCache.chargeDernierBuffer(lestables.get(0));
         System.out.println(memCache.toString());
         
@@ -45,7 +46,9 @@ public class Appli extends javax.swing.JFrame {
         
         memCache.chargeDernierBuffer(lestables.get(0));
         System.out.println(memCache.toString());
-        
+        */
+        memCache.pos_attr_joint = 1;;
+        ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville");
         
         initJList();
     }
@@ -353,19 +356,21 @@ public class Appli extends javax.swing.JFrame {
         String nomTable = "ResProduitCart_" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
         res.setNom(nomTable);
         
-        while (!memCache.getBufferS().getB().isEmpty() )
+        do
         {
             memCache.getBufferS().getB().clear(); // flush du bufferS
             memCache.chargeDernierBuffer(S); //charge du bufferS
             
-            while(!memCache.getBuffersR().isEmpty())
+            do
             {
                 memCache.getBuffersR().clear(); //flush des buffersR
                 memCache.chargeBuffer(R); // charge des buffersR
                 //methode parcours buff
+                memCache.parcoursMem();
                 
-            }
-        }
+            }while(!memCache.getBuffersR().isEmpty());
+            
+        }while (!memCache.getBufferS().getB().isEmpty() );
         
         
         
