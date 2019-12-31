@@ -37,9 +37,9 @@ public class Appli extends javax.swing.JFrame {
         this.lestables.add(genereTableS());        
         
         
-        //this.lestables.add(ProduitCart(lestables.get(0), "Ville",lestables.get(1), "Ville"));
+        this.lestables.add(ProduitCart(lestables.get(0), "Ville",lestables.get(1), "Ville"));
         
-        this.lestables.add(ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville"));
+        //this.lestables.add(ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville"));
         
         initJList();
     }

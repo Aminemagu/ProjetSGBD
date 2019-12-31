@@ -58,6 +58,8 @@ public class MemoireCache {
     
     public void chargeBuffer(Table R)
     {
+        this.getBuffersR().clear(); //flush des buffersR
+        
         System.out.println("Chargement buffer R ");
         for(int i =0 ; i<this.getM()-1;i++){  // M
             for(int j =0 ;j<this.bufferS.getCapacite();j++){ //capacite en bloc du buffer = 3 on suppose que le bufferS a la meme capacite que les buffersS
@@ -65,6 +67,7 @@ public class MemoireCache {
                     this.buffersR.add(new Buffer());
                     this.getBuffersR().get(i).getB().add(R.getBlocs().get(this.indiceR));
                     this.indiceR = this.indiceR+1;
+                    //System.out.println("nbr_bufferR="+R.getBlocs().size() ); // a suppr
                 }
             }                          
         }        
@@ -72,6 +75,8 @@ public class MemoireCache {
     
     public void chargeDernierBuffer(Table S)
     {
+        this.getBufferS().getB().clear(); // flush du bufferS
+        
         System.out.println("Chargement buffer S ");
         for(int i =0 ;i<this.bufferS.getCapacite();i++){ //parcours blocs
             if(this.indiceS<S.getBlocs().size()){
