@@ -328,6 +328,7 @@ public class Appli extends javax.swing.JFrame {
         String nomTable = "ResProduitCart_" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
         System.out.println(nomTable+"\n");
         res.setNom(nomTable);
+        memCache.tableCache = res;
         initCurseurRetS();
         
         do
@@ -348,7 +349,7 @@ public class Appli extends javax.swing.JFrame {
         
         //memCache.getBufferS().getB().add(new Bloc()); // init 
         
-        return res;
+        return memCache.tableCache;
     }
     
     private void initJList()

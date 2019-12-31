@@ -21,14 +21,16 @@ public class MemoireCache {
     protected int indiceS;
     protected int pos_attr_jointR;
     protected int pos_attr_jointS;
+    protected Table tableCache;
 
     public MemoireCache() {
         this.M= 4;
         this.indiceS = 0;
         this.indiceR = 0;
-        this.buffersR =new ArrayList<Buffer>();
+        this.pos_attr_jointR = 0; 
+        this.pos_attr_jointS = 0;
+        this.buffersR = new ArrayList<Buffer>();
         this.bufferS = new Buffer();
-        
     }
 
 
@@ -113,9 +115,9 @@ public class MemoireCache {
     //c.à.d l'attribut R.a et S.a ont meme pos dans la table R et S
     public void parcoursCase(Ligne ls, Ligne lr, int pos_attr_jointS, int pos_attr_jointR)
     {
+        List attr_res = new ArrayList<String>();
         if (ls.getAttributs().get(pos_attr_jointS) == lr.getAttributs().get(pos_attr_jointR))
         {
-            List attr_res = new ArrayList<String>();
             for(int i=0; i< ls.getAttributs().size(); i++)
             {
                  attr_res.add(ls.getAttributs().get(i));
@@ -130,11 +132,11 @@ public class MemoireCache {
                     System.out.print(lr.getAttributs().get(j)+" | ");
                 }                   
             }
-            System.out.println("");           
-            //return Ligne res 
+            System.out.println("");
+            this.tableCache.insertLigne(attr_res);
+            
         }
         
-        //return null
     }
     
     
