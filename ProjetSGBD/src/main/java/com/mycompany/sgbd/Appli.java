@@ -37,7 +37,7 @@ public class Appli extends javax.swing.JFrame {
         
         //this.lestables.add(ProduitCart(lestables.get(0), "ville",lestables.get(1), "Ville"));
         // lestables.get(3) et pas .get(2) car on vient d'ajouter une table avant
-        this.lestables.add(ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville"));
+        this.lestables.add(ProduitCart(lestables.get(0), "ville",lestables.get(1), "Ville"));
         
         this.lestables.add(ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville"));
         
@@ -312,6 +312,12 @@ public class Appli extends javax.swing.JFrame {
         return res;
     }
     
+    public void initCurseurRetS()
+    {
+        memCache.indiceR = 0;
+        memCache.indiceS = 0;
+    }
+    
 
     
     
@@ -322,12 +328,13 @@ public class Appli extends javax.swing.JFrame {
         String nomTable = "ResProduitCart_" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
         System.out.println(nomTable+"\n");
         res.setNom(nomTable);
+        initCurseurRetS();
         
         do
         {
             memCache.getBufferS().getB().clear(); // flush du bufferS
             memCache.chargeDernierBuffer(S); //charge du bufferS
-            System.out.println("PASSE");
+
             do
             {
                 memCache.getBuffersR().clear(); //flush des buffersR
