@@ -36,9 +36,8 @@ public class Appli extends javax.swing.JFrame {
         this.lestables.add(genereTableR());
         this.lestables.add(genereTableS());        
         
-        //this.lestables.add(ProduitCart(lestables.get(0), "ville",lestables.get(1), "Ville"));
-        // lestables.get(3) et pas .get(2) car on vient d'ajouter une table avant
-        this.lestables.add(ProduitCart(lestables.get(0), "Ville",lestables.get(1), "Ville"));
+        
+        //this.lestables.add(ProduitCart(lestables.get(0), "Ville",lestables.get(1), "Ville"));
         
         this.lestables.add(ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville"));
         

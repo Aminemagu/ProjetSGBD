@@ -111,8 +111,7 @@ public class MemoireCache {
         }
     }
     
-    // il faut que les 2 tables aient la meme structure
-    //c.à.d l'attribut R.a et S.a ont meme pos dans la table R et S
+
     public void parcoursCase(Ligne ls, Ligne lr, int pos_attr_jointS, int pos_attr_jointR)
     {
         List attr_res = new ArrayList<String>();
@@ -144,9 +143,14 @@ public class MemoireCache {
     public String toString()
     {
         String s="----MEMOIRE---- \n";
+        s+= "chargeBuffers R (NbrBuffers : "+this.buffersR.size()+") : \n";
         for(int i=0;i<this.getBuffersR().size(); i++)
-            s+= "Buffer "+i+" (taille : "+this.getBuffersR().get(i).getB().size()+ ") : "+this.getBuffersR().get(i).toString()+"\n";
-            s+= "DernierBuffer S (taille : "+this.bufferS.getB().size()+") : "+this.bufferS.toString()+"\n";
+        {
+            s+= "Buffer "+i+" (NbrBlocs : "+this.getBuffersR().get(i).getB().size()+ ") : "+this.getBuffersR().get(i).toString()+"\n";
+        }
+        
+        s+= "DernierBuffer S (NbrBlocs : "+this.bufferS.getB().size()+") : "+this.bufferS.toString()+"\n";
+        
         return s;
     }
 
