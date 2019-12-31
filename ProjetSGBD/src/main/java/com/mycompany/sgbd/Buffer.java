@@ -22,6 +22,14 @@ public class Buffer {
         this.b = new ArrayList<Bloc>();
         
     }
+    
+    public Buffer(Bloc b) //init du bloc avec la taille du bloc passe en para
+    {
+        this.capacite=3;
+        this.b = new ArrayList<Bloc>();
+        for(int i=0; i<this.capacite;i++)
+            this.getB().add(b);
+    }
 
     public int getCapacite() {
         return capacite;

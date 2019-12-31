@@ -31,27 +31,15 @@ public class Appli extends javax.swing.JFrame {
         this.lestables.add(genereTable2());
         Table R = lestables.get(0);
         Table S = lestables.get(1);
-        //this.lestables.add(ProduitCartesien(R, "ville", S, "Ville"));
         
         this.lestables.add(genereTableR());
-        this.lestables.add(genereTableS());
-        //this.lestables.add(ProduitCartesien(lestables.get(3), "Ville", lestables.get(4),"Ville"));
+        this.lestables.add(genereTableS());        
         
-        /*
-        memCache.chargeDernierBuffer(lestables.get(0));
-        System.out.println(memCache.toString());
+        //this.lestables.add(ProduitCart(lestables.get(0), "ville",lestables.get(1), "Ville"));
+        // lestables.get(3) et pas .get(2) car on vient d'ajouter une table avant
+        this.lestables.add(ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville"));
         
-        memCache.getBufferS().getB().clear();
-        System.out.println(memCache.toString());
-        
-        memCache.chargeDernierBuffer(lestables.get(0));
-        System.out.println(memCache.toString());
-        */
-        
-        memCache.pos_attr_joint = 1;;
-        ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville");
-        System.out.println(memCache.toString());
-        
+        this.lestables.add(ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville"));
         
         initJList();
     }
@@ -303,12 +291,20 @@ public class Appli extends javax.swing.JFrame {
         List<String> attributNewTable = new ArrayList<String>();
         for (int i = 0; i < R.getAttribut().size(); i++) {
             attributNewTable.add(R.getAttribut().get(i));
-            System.out.println(R.getAttribut().get(i));
+            if(R.getAttribut().get(i).equals(a))
+            {
+                this.memCache.pos_attr_jointR = i;
+                System.out.println("Jointure : pos_attr_jointR="+i);
+            }
         }
         for (int i = 0; i < S.getAttribut().size(); i++) {
             if (!(S.getAttribut().get(i).equals(b))) {
                 attributNewTable.add(S.getAttribut().get(i));
-                System.out.println(S.getAttribut().get(i));
+            }
+            else
+            {
+                this.memCache.pos_attr_jointS = i;
+                System.out.println("Jointure : pos_attr_jointS="+i);
             }
         }
 
@@ -316,40 +312,7 @@ public class Appli extends javax.swing.JFrame {
         return res;
     }
     
-    /*private Table ProduitCartesien(Table R, String a, Table S, String b) {
 
-        Table res = genereTableJoin(R, a, S, b);
-        String nomTable = "ResProduitCart_" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
-        res.setNom(nomTable);
-        int nbBlocksParBuffer = memCache.getBuffers().get(0).getCapacite();
-        int nbBlocksPourBufferR = (memCache.getBuffers().get(0).getCapacite() * (memCache.getM() - 1));
-        int nbLignePBlocsR = R.getBlocs().get(0).getNbLigneParBloc();
-        int nbLignePBlocsS = S.getBlocs().get(0).getNbLigneParBloc();
-        
-        for (int i = 0; i < S.getBlocs().size(); i = i + nbBlocksParBuffer) {
-            //this.memCache.chargeDernierBuffer(S, i);
-            for (int j = 0; j < R.getBlocs().size(); j = j + nbBlocksPourBufferR) {
-                //this.memCache.chargeBuffer(R, j);
-
-                for (int buffR = 0; buffR < memCache.getM() - 1; buffR++) {
-                    for (int blR = 0; blR < nbBlocksParBuffer; blR++) {
-                        for (int liR = 0; liR < nbLignePBlocsR; liR++) {
-                            System.out.println("[" + buffR + "][" + blR + "][+" + liR + "]");
-                            for (int blS = 0; blS < nbBlocksParBuffer; blS++) {
-                                for (int liS = 0; liS < nbLignePBlocsS; liS++) {
-                                    
-                                    Bloc lS = this.memCache.getBuffers().get(memCache.getM() - 1).getB().get(blS);
-                               
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
-        return res;
-    }*/
     
     
     
@@ -357,13 +320,14 @@ public class Appli extends javax.swing.JFrame {
     {
         Table res = genereTableJoin(R, a, S, b);
         String nomTable = "ResProduitCart_" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
+        System.out.println(nomTable+"\n");
         res.setNom(nomTable);
         
         do
         {
             memCache.getBufferS().getB().clear(); // flush du bufferS
             memCache.chargeDernierBuffer(S); //charge du bufferS
-            
+            System.out.println("PASSE");
             do
             {
                 memCache.getBuffersR().clear(); //flush des buffersR
@@ -375,14 +339,14 @@ public class Appli extends javax.swing.JFrame {
             
         }while (!memCache.getBufferS().getB().isEmpty() );
         
-        
+        //memCache.getBufferS().getB().add(new Bloc()); // init 
         
         return res;
     }
     
     private void initJList()
     {
-         for (int b = 0; b < lestables.size(); b++) 
+        for (int b = 0; b < lestables.size(); b++) 
             {
             def_jlist.addElement(lestables.get(b).getNom());
             }
