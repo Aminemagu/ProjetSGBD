@@ -6,6 +6,7 @@
 package com.mycompany.sgbd;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -37,7 +38,7 @@ public class Appli extends javax.swing.JFrame {
         
         //this.lestables.add(ProduitCart(lestables.get(0), "ville",lestables.get(1), "Ville"));
         // lestables.get(3) et pas .get(2) car on vient d'ajouter une table avant
-        this.lestables.add(ProduitCart(lestables.get(0), "ville",lestables.get(1), "Ville"));
+        this.lestables.add(ProduitCart(lestables.get(0), "Ville",lestables.get(1), "Ville"));
         
         this.lestables.add(ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville"));
         
@@ -59,6 +60,8 @@ public class Appli extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        BTN_produitcart = new javax.swing.JButton();
+        LBL_selection = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +90,16 @@ public class Appli extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jList1);
 
+        BTN_produitcart.setText("ProduitCart() sur Ville");
+        BTN_produitcart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_produitcartActionPerformed(evt);
+            }
+        });
+
+        LBL_selection.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LBL_selection.setText("Veuillez sélectionner deux tables dans la liste");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,7 +111,9 @@ public class Appli extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                    .addComponent(BTN_produitcart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LBL_selection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -113,7 +128,11 @@ public class Appli extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(3, 3, 3)
+                .addComponent(LBL_selection)
+                .addGap(1, 1, 1)
+                .addComponent(BTN_produitcart)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -121,8 +140,22 @@ public class Appli extends javax.swing.JFrame {
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         jLabel1.setText(""+jList1.getSelectedValue());
-        genereTable(this.lestables, jList1.getSelectedValue());
+        genereTables(this.lestables, jList1.getSelectedValue());
     }//GEN-LAST:event_jList1ValueChanged
+
+    private void BTN_produitcartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_produitcartActionPerformed
+        List<Integer> items = new ArrayList<Integer>();
+        if(jList1.getSelectedIndices().length == 2)
+        {
+            items.add(jList1.getSelectedIndices()[0]);
+            items.add(jList1.getSelectedIndices()[1]);
+            this.lestables.add(ProduitCart(lestables.get(items.get(0)), "Ville",lestables.get(items.get(1)), "Ville"));            
+            this.LBL_selection.setText(lestables.get(items.get(0)).getNom()+" X "+lestables.get(items.get(1)).getNom());
+            initJList();
+        }
+        else
+            this.LBL_selection.setText("Il n'y a pas 2 tables selectionnées !");
+    }//GEN-LAST:event_BTN_produitcartActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,7 +198,7 @@ public class Appli extends javax.swing.JFrame {
         List<String> attributs = new ArrayList<String>();
         attributs.add("id_etu");
         attributs.add("nom");
-        attributs.add("ville");
+        attributs.add("Ville");
 
         Table tableR = new Table("Etudiant", attributs);
 
@@ -354,14 +387,16 @@ public class Appli extends javax.swing.JFrame {
     
     private void initJList()
     {
+        def_jlist.clear();
         for (int b = 0; b < lestables.size(); b++) 
             {
             def_jlist.addElement(lestables.get(b).getNom());
             }
-         
+        
+        this.jList1.setSelectedIndex(0);
     }
     
-    public void genereTable(List<Table> lestables, String nom) {
+    public void genereTables(List<Table> lestables, String nom) {
         
         Table aAffiche;
         String[] entetes={};
@@ -399,6 +434,8 @@ public class Appli extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTN_produitcart;
+    private javax.swing.JLabel LBL_selection;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
