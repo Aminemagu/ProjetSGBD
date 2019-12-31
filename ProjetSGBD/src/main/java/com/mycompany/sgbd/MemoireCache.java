@@ -144,6 +144,16 @@ public class MemoireCache {
         
     }
     
+    public int CartesienCout()
+    {
+        int c = this.bufferS.getB().size(); //ajout des blocs de S dans le buffer
+        
+        for(int i=0; i<this.buffersR.size();i++)
+            c+= this.buffersR.get(i).getB().size();
+        
+        return c;
+    }
+    
     
     
     public String toString()
