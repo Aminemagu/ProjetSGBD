@@ -37,9 +37,7 @@ public class Appli extends javax.swing.JFrame {
         this.lestables.add(genereTableR());
         this.lestables.add(genereTableS());        
         
-        
-        this.lestables.add(ProduitCart(lestables.get(0), "Ville",lestables.get(1), "Ville"));
-        
+        //this.lestables.add(ProduitCart(lestables.get(0), "Ville",lestables.get(1), "Ville"));       
         //this.lestables.add(ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville"));
         
         initJList();
@@ -265,7 +263,14 @@ public class Appli extends javax.swing.JFrame {
             l4.add("" + ((int) (Math.random() * 100)));
             tableR.insertLigne(l4);
         }
-        //System.out.println(tableR.toString());
+        List<String> l = new ArrayList<String>();
+        l.add("13");
+        l.add("JILEAU");
+        l.add("Felix");
+        l.add("Macon");
+        l.add("58");
+        tableR.insertLigne(l);
+        
         return tableR;
 
     }
