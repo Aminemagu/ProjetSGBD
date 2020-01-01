@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" alignment="1" pref="543" max="32767" attributes="0"/>
@@ -38,6 +38,7 @@
                   <Component id="jScrollPane2" pref="277" max="32767" attributes="0"/>
                   <Component id="BTN_produitcart" alignment="0" max="32767" attributes="0"/>
                   <Component id="LBL_selection" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -65,7 +66,9 @@
               </Group>
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               <Component id="BTN_produitcart" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -135,6 +138,11 @@
     <Component class="javax.swing.JLabel" name="LBL_cout">
       <Properties>
         <Property name="text" type="java.lang.String" value="Co&#xfb;t (Nombre de blocs lus) ="/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="KeyLookup() sur Ville"/>
       </Properties>
     </Component>
   </SubComponents>

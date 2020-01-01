@@ -65,7 +65,8 @@ public class MemoireCache {
             if(this.indiceR<R.getBlocs().size())
                 this.buffersR.add(new Buffer());
             
-            for(int j =0 ;j<this.bufferS.getCapacite();j++){ //capacite en bloc du buffer = 3 on suppose que le bufferS a la meme capacite que les buffersS
+            for(int j =0 ;j<this.bufferS.getCapacite();j++){
+                //capacite en bloc du buffer = 3 on suppose que le bufferS a la meme capacite que les buffersS
                 if(this.indiceR<R.getBlocs().size()){
                     this.getBuffersR().get(i).getB().add(R.getBlocs().get(this.indiceR));
                     this.indiceR = this.indiceR+1;
