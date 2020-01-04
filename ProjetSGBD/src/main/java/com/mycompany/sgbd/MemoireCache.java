@@ -92,7 +92,7 @@ public class MemoireCache {
     public void parcoursMem()
     {
         
-        for(int i=0; i<bufferS.getB().size();i++) //bufferR
+        for(int i=0; i<bufferS.getB().size();i++) //bufferS
         {
             for(int j=0; j<buffersR.size();j++) //taille buffersR
             {
@@ -145,24 +145,48 @@ public class MemoireCache {
         
     }
     
-    //methode charge buffer de keyLookup
-    public void chargeBufferKeylook(Table R)
+   
+    
+    public void chargeUnBufferR(Bloc br)
     {
-        this.getBuffersR().clear(); //flush des buffersR
-        
-        System.out.println("Chargement buffer R KeyLook ");
-        for(int i =0 ; i<this.getM()-1;i++){  // M
-            if(this.indiceR<R.getBlocs().size())
+            if(this.buffersR.size() == 0)
+            {
                 this.buffersR.add(new Buffer());
+            }
             
-            for(int j =0 ;j<this.bufferS.getCapacite();j++){
-                //capacite en bloc du buffer = 3 on suppose que le bufferS a la meme capacite que les buffersS
-                if(this.indiceR<R.getBlocs().size()){
-                    this.getBuffersR().get(i).getB().add(R.getBlocs().get(this.indiceR));
-                    this.indiceR = this.indiceR+1;
+            if(this.buffersR.size() <= this.M -1 ) //si les buffersR ne sont pas remplis et que le dernier buffer de R n'est pas rempli
+            {
+               //si dernier element pas rempli et que ce n'est pas le dernier buffer
+               
+
+               
+               if( (this.buffersR.get(buffersR.size()-1).getB().size() < this.bufferS.getCapacite() ) && (this.buffersR.size() != this.M-1 ) )
+               {
+                   this.buffersR.get(buffersR.size()-1).getB().add(br);
+               }
+               
+            }
+                              
+    }
+    
+    //parcours bufferS
+    
+    public void chargeBufferKeylook()
+    {
+        for(int i=0; i<bufferS.getB().size();i++) //bufferS
+        {
+            Bloc s =bufferS.getB().get(i);
+            for(int j=0; j<s.getLignes().size(); j++)
+            {
+                Ligne ls = s.getLignes().get(j);
+                for(int k=0; k< ls.getAttributs().size();k++)
+                {
+                    String attr = ls.getAttributs().get(k);
+                    
                 }
-            }                          
-        }        
+                
+            }
+        }
     }
     
     

@@ -47,6 +47,12 @@ public class Appli extends javax.swing.JFrame {
         System.out.println(lestables.get(4).toString());
         System.out.println(lestables.get(5).toString());
         
+        
+        //TEST
+        memCache.getBuffersR().clear();
+        memCache.chargeUnBufferR(new Bloc());
+        
+        
         initJList();
     }
 
@@ -452,7 +458,7 @@ public class Appli extends javax.swing.JFrame {
             do
             {
                 memCache.getBuffersR().clear(); //flush des buffersR
-                memCache.chargeBuffer(R); // charge des buffersR
+                //memCache.chargeUnBloc(new Bloc()) // charge des buffersR
                 //methode parcours buff
                 memCache.parcoursMem();
                 System.out.println(memCache.toString());
