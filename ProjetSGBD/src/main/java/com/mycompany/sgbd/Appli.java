@@ -31,8 +31,6 @@ public class Appli extends javax.swing.JFrame {
         this.lestables = new ArrayList<Table>();
         this.lestables.add(genereTable1());
         this.lestables.add(genereTable2());
-        Table R = lestables.get(0);
-        Table S = lestables.get(1);
         
         this.lestables.add(genereTableR());
         this.lestables.add(genereTableS());                
@@ -47,10 +45,15 @@ public class Appli extends javax.swing.JFrame {
         System.out.println(lestables.get(4).toString());
         System.out.println(lestables.get(5).toString());
         
+        this.lestables.add(genereTable1Index());
+        this.lestables.add(genereTable2Index());
+        System.out.println(lestables.get(6).toString());
+        System.out.println(lestables.get(7).toString());
+        
         
         //TEST
         //attention : le premier paramètre doit être la table avec l'index
-        this.lestables.add(keyLookup(lestables.get(4), "Ville", lestables.get(3), "Ville" ));
+        //this.lestables.add(keyLookup(lestables.get(4), "Ville", lestables.get(3), "Ville" ));
         
         
         initJList();
@@ -256,6 +259,24 @@ public class Appli extends javax.swing.JFrame {
 
     }
     
+    public Table genereTable1Index()
+    {
+        Table res = genereTable1();
+        Index ind = new Index(2); // 1 -> ville
+        res.setIndext(ind);
+        res.setNom("Etudiant(Ville)");        
+        return res;
+    }
+    
+    public Table genereTable2Index()
+    {
+        Table res = genereTable2();
+        Index ind = new Index(3); // 1 -> ville
+        res.setIndext(ind);
+        res.setNom("Habitant(Ville)");        
+        return res;
+    }
+    
     public Table genereTable2() {
 
         List<String> attributs = new ArrayList<String>();
@@ -441,6 +462,9 @@ public class Appli extends javax.swing.JFrame {
     }
     
     
+    //attention : le premier paramètre doit être la table avec l'index
+    // si 2 tables avec index passées en paramètre alors le keylookup 
+    //se fait seulement sur le 1 ere argument
     private Table keyLookup(Table R, String a, Table S, String b)
     {
         Table res = genereTableJoin(R, a, S, b);
