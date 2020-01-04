@@ -109,6 +109,10 @@ public class Table {
                             l.add(i); //on ajoute l'indice du bloc correspondant a l'attribut
                             indext.getIndex().put(attr, new ArrayList<Integer>() );
                         }
+                        else // l'attribut est deja present dans l'index, il faut ajouter l'indice du bloc
+                        {
+                            indext.getIndex().get(attr).add(i); // on ajoute l'indice du bloc correspondant à l'attribut 
+                        }
                     }
                 }
             }
