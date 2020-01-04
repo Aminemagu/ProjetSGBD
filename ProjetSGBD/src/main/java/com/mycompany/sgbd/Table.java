@@ -117,16 +117,16 @@ public class Table {
                     if(k == pos ) //pour parcourir uniquement l'attribut d'index
                     {
                         String attr = this.getBlocs().get(i).getLignes().get(j).getAttributs().get(k);
-                        if( indext.getIndex().get(k) == null) //si attribut pas dans l'index on l'ajoute
+                        if( indext.getIndex().get(attr) == null) //si attribut pas dans l'index on l'ajoute
                         {
                             ArrayList l = new ArrayList<Integer>();
                             l.add(i); //on ajoute l'indice du bloc correspondant a l'attribut
-                            indext.getIndex().put(attr, l);
+                            indext.getIndex().put(attr, l);                            
                         }
                         else // l'attribut est deja present dans l'index, il faut ajouter l'indice du bloc
                         {
                             indext.getIndex().get(attr).add(i); // on ajoute l'indice du bloc correspondant à l'attribut
-                            System.out.println("coucou"+i);
+                            
                         }
                     }
                 }
