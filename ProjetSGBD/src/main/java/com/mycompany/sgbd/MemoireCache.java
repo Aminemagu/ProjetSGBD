@@ -147,31 +147,32 @@ public class MemoireCache {
     
    
     
-    public void chargeUnBufferR(Bloc br)
+    public boolean chargeUnBufferR(Bloc br)
     {
             if(this.buffersR.size() == 0)
             {
                 this.buffersR.add(new Buffer());
+                return true;
             }
             
             if(this.buffersR.size() <= this.M -1 ) //si les buffersR ne sont pas remplis et que le dernier buffer de R n'est pas rempli
             {
                //si dernier element pas rempli et que ce n'est pas le dernier buffer
-               
 
-               
                if( (this.buffersR.get(buffersR.size()-1).getB().size() < this.bufferS.getCapacite() ) && (this.buffersR.size() != this.M-1 ) )
                {
                    this.buffersR.get(buffersR.size()-1).getB().add(br);
+                   return true;
                }
                
             }
-                              
+            
+            return false;
     }
     
     //parcours bufferS
     
-    public void chargeBufferKeylook()
+    public void chargeBufferKeylook(Table R) // Table R avec INDEX!
     {
         for(int i=0; i<bufferS.getB().size();i++) //bufferS
         {
@@ -181,7 +182,23 @@ public class MemoireCache {
                 Ligne ls = s.getLignes().get(j);
                 for(int k=0; k< ls.getAttributs().size();k++)
                 {
-                    String attr = ls.getAttributs().get(k);
+                    if(R.getIndext().getPos_i() == k) //critere de jointure
+                    {
+                        String attr = ls.getAttributs().get(k);
+                       
+                        List al = R.getIndext().getIndex().get(attr);
+                        for(int l=0;l< al.size();l++)
+                        { 
+                            if( chargeUnBufferR(R.getBlocs().get(l)) ) //si succes de charge buffer 
+                            {
+                                //on enleve le bloc de l'index car traité
+                                al.remove(l);
+                                R.getIndext().getIndex().put(attr, al); //on met la nouvelle liste dans l'index
+                            }
+                               
+                        }
+                        
+                    }  
                     
                 }
                 

@@ -49,8 +49,8 @@ public class Appli extends javax.swing.JFrame {
         
         
         //TEST
-        memCache.getBuffersR().clear();
-        memCache.chargeUnBufferR(new Bloc());
+        //attention : le premier paramètre doit être la table avec l'index
+        this.lestables.add(keyLookup(lestables.get(4), "Ville", lestables.get(3), "Ville" ));
         
         
         initJList();
@@ -347,7 +347,8 @@ public class Appli extends javax.swing.JFrame {
     {
         Table res = genereTableR();
         Index ind = new Index(1); // 1 -> ville
-        res.setIndext(ind);        
+        res.setIndext(ind);
+        res.setNom("R(Ville)");
         return res;
     }
     
@@ -355,7 +356,8 @@ public class Appli extends javax.swing.JFrame {
     {
         Table res = genereTableS();
         Index ind = new Index(1); // 1 -> ville
-        res.setIndext(ind);        
+        res.setIndext(ind);
+        res.setNom("S(Ville)");        
         return res;
     }
     
@@ -457,8 +459,8 @@ public class Appli extends javax.swing.JFrame {
 
             do
             {
-                memCache.getBuffersR().clear(); //flush des buffersR
-                //memCache.chargeUnBloc(new Bloc()) // charge des buffersR
+                memCache.getBuffersR().clear(); //flush des buffersR                
+                memCache.chargeBufferKeylook(R); // charge des buffersR
                 //methode parcours buff
                 memCache.parcoursMem();
                 System.out.println(memCache.toString());

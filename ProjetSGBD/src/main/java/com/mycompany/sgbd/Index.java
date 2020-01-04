@@ -38,6 +38,8 @@ public class Index {
     public void setIndex(HashMap<String, List<Integer>> index) {
         this.index = index;
     }
+    
+
 
     public String toString()
     {
