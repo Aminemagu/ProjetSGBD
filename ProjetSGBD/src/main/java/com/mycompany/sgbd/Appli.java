@@ -53,7 +53,7 @@ public class Appli extends javax.swing.JFrame {
         
         //TEST
         //attention : le premier paramètre doit être la table avec l'index
-        // keyLookup(lestables.get(4), "Ville", lestables.get(3), "Ville" ) -> fonctionne
+        this.lestables.add(keyLookup(lestables.get(4), "Ville", lestables.get(3), "Ville" )); //-> fonctionne
         
         //this.lestables.add(keyLookup(lestables.get(6), "Ville", lestables.get(7), "Ville" ));
         System.out.println("\n \n --------------");
