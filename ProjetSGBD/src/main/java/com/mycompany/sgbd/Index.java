@@ -5,7 +5,8 @@
  */
 package com.mycompany.sgbd;
 
-import java.util.Hashtable;
+
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,12 +15,28 @@ import java.util.List;
  */
 public class Index {
     private int pos_i; //index sur attribut en pos_i
-    private Hashtable<String, List<Integer> > index; // un attribut correspond à des addresses de blocs
+    private HashMap<String, List<Integer> > index; // un attribut correspond à des addresses de blocs
     
-    
+
     public Index(int pos_i) {
         this.pos_i = pos_i;
-        index = new Hashtable<String, List<Integer>>();        
+        index = new HashMap<String, List<Integer>>();        
+    }
+
+    public int getPos_i() {
+        return pos_i;
+    }
+
+    public void setPos_i(int pos_i) {
+        this.pos_i = pos_i;
+    }
+
+    public HashMap<String, List<Integer>> getIndex() {
+        return index;
+    }
+
+    public void setIndex(HashMap<String, List<Integer>> index) {
+        this.index = index;
     }
 
     

@@ -91,8 +91,32 @@ public class Table {
     //remplir l'index de posiition pos_i:
     public void remplirIndex(int pos)
     {
+        this.indext = new Index(pos);
+        
+        for(int i=0; i<this.getBlocs().size();i++) //parcours blocs
+        {
+            for(int j=0; j<this.getBlocs().get(i).getLignes().size();j++) //parcours lignes
+            {
+                for(int k=0; k<this.getBlocs().get(i).getLignes().get(j).getAttributs().size();k++) //parcours attributs
+                {
+                    if(this.getBlocs().get(i).getLignes().get(j).getAttributs().get(k) == this.getBlocs().get(i).getLignes().get(j).getAttributs().get(pos) ) //pour parcourir uniquement l'attribut d'index
+                    {
+                        String attr = this.getBlocs().get(i).getLignes().get(j).getAttributs().get(k);
+                        
+                        if( indext.getIndex().get(k) == null) //si attribut pas dans l'index on l'ajoute
+                        {
+                            ArrayList l = new ArrayList<Integer>();
+                            l.add(i); //on ajoute l'indice du bloc correspondant a l'attribut
+                            indext.getIndex().put(attr, new ArrayList<Integer>() );
+                        }
+                    }
+                }
+            }
+            
+        }
         
     }
     
+ 
     
 }
