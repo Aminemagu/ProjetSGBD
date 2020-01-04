@@ -15,7 +15,7 @@ import java.util.List;
 public class Table {
     private List<Bloc> blocs;
     private String nom;
-    private List<Indexes> indexes;
+    private Index indext;
     private List<String> attributs;
     
 
@@ -24,7 +24,6 @@ public class Table {
         this.nom = n;
         this.blocs = new ArrayList<Bloc>();
         this.blocs.add(new Bloc());
-        this.indexes = new ArrayList<Indexes>();
     }
 
     public List<Bloc> getBlocs() {
@@ -35,9 +34,7 @@ public class Table {
         this.blocs = blocs;
     }
 
-    public List<Indexes> getIndexes() {
-        return indexes;
-    }
+    
 
     public String getNom() {
         return nom;
@@ -51,9 +48,7 @@ public class Table {
         return attributs;
     }
 
-    public void setIndexes(List<Indexes> indexes) {
-        this.indexes = indexes;
-    }
+   
     
     //méthode pour insérer les lignes dans les blocs selon leurs capacitées
     void insertLigne(List<String> l1) {
@@ -90,6 +85,13 @@ public class Table {
       
         
         return nb;
+    }
+    
+    
+    //remplir l'index de posiition pos_i:
+    public void remplirIndex(int pos)
+    {
+        
     }
     
     

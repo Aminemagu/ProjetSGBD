@@ -12,20 +12,18 @@ import java.util.List;
  *
  * @author tb985403
  */
-public class Indexes {
-    Hashtable<Integer, String> hm; 
+public class Index {
+    private int pos_i; //index sur attribut en pos_i
+    private Hashtable<String, List<Integer> > index; // un attribut correspond à des addresses de blocs
     
-    public Indexes() {
-        this.hm = new Hashtable<Integer, String>();
+    
+    public Index(int pos_i) {
+        this.pos_i = pos_i;
+        index = new Hashtable<String, List<Integer>>();        
     }
 
-    public Hashtable<Integer, String> getHm() {
-        return hm;
-    }
-
-    public void setHm(Hashtable<Integer, String> hm) {
-        this.hm = hm;
-    }
+    
+    
     
     
     
