@@ -156,8 +156,14 @@ public class MemoireCache {
             
             if(this.buffersR.size() <= this.M -1 ) //si les buffersR ne sont pas remplis et que le dernier buffer de R n'est pas rempli
             {
+               
+               //allocation d'un buffer si le precdent est plein et que la taille du BuffersR n'excede pas M-1
+               if( ( this.buffersR.get(buffersR.size()-1).getB().size() == this.bufferS.getCapacite() ) && (this.buffersR.size() != this.M-1 ))
+               {
+                   this.buffersR.add(new Buffer());
+               }
+               
                //si dernier element pas rempli et que ce n'est pas le dernier buffer
-
                if( (this.buffersR.get(buffersR.size()-1).getB().size() < this.bufferS.getCapacite() ) && (this.buffersR.size() != this.M-1 ) )
                {
                    this.buffersR.get(buffersR.size()-1).getB().add(br);
@@ -186,12 +192,12 @@ public class MemoireCache {
                         String attr = ls.getAttributs().get(k);
                        
                         List al = R.getIndext().getIndex().get(attr);
-
+                        if(al == null)
+                           System.out.println(attr);
                         if(al != null) //si il existe une jointure
                         {
                             for(int l=0;l< al.size();l++)
                             {
-                                
                                 if( chargeUnBufferR(R.getBlocs().get(l)) ) //si succes de charge buffer 
                                 {
                                     //on enleve le bloc de l'index car traité

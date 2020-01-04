@@ -53,9 +53,11 @@ public class Appli extends javax.swing.JFrame {
         
         //TEST
         //attention : le premier paramètre doit être la table avec l'index
-        this.lestables.add(keyLookup(lestables.get(4), "Ville", lestables.get(3), "Ville" ));
+        // keyLookup(lestables.get(4), "Ville", lestables.get(3), "Ville" ) -> fonctionne
+        
+        //this.lestables.add(keyLookup(lestables.get(6), "Ville", lestables.get(7), "Ville" ));
         System.out.println("\n \n --------------");
-        System.out.println(lestables.get(8));
+        //System.out.println(lestables.get(8));
         
         //System.out.println(ProduitCart(lestables.get(4), "Ville",lestables.get(3), "Ville"));
         
@@ -274,7 +276,7 @@ public class Appli extends javax.swing.JFrame {
     public Table genereTable2Index()
     {
         Table res = genereTable2();
-        res.remplirIndex(3); // 3 -> Ville
+        res.remplirIndex(2); // 3 -> Ville
         res.setNom("Habitant(Ville)");        
         return res;
     }
@@ -284,8 +286,8 @@ public class Appli extends javax.swing.JFrame {
         List<String> attributs = new ArrayList<String>();
         attributs.add("id_hab");
         attributs.add("nom");
-        attributs.add("Prenom");
         attributs.add("Ville");
+        attributs.add("Prenom");
         attributs.add("age");
 
         Table tableR = new Table("Habitant", attributs);
@@ -294,16 +296,17 @@ public class Appli extends javax.swing.JFrame {
             List<String> l4 = new ArrayList<String>();
             l4.add("" + i);
             l4.add(generate(6));
-            l4.add(generate(6));
             l4.add("Dijon");
+            l4.add(generate(6));            
             l4.add("" + ((int) (Math.random() * 100)));
             tableR.insertLigne(l4);
         }
+        
         List<String> l = new ArrayList<String>();
         l.add("13");
         l.add("JILEAU");
-        l.add("Felix");
         l.add("Macon");
+        l.add("Felix");
         l.add("58");
         tableR.insertLigne(l);
         
@@ -382,7 +385,7 @@ public class Appli extends javax.swing.JFrame {
         return res;
     }
     
-    public static String generate(int length) {
+    public String generate(int length) {
         String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuffer pass = new StringBuffer();
         for (int x = 0; x < length; x++) {
