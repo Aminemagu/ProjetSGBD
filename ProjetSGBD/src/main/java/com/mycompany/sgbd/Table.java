@@ -47,9 +47,8 @@ public class Table {
         return attributs;
     }
 
-    public void setIndext(Index indext) {
+    public void setIndext(int p) {
         this.indext = indext;
-        this.remplirIndex(indext.getPos_i());
     }
 
     public Index getIndext() {
@@ -107,6 +106,7 @@ public class Table {
     public void remplirIndex(int pos)
     {
         this.indext = new Index(pos);
+        this.setIndext(pos);
         
         for(int i=0; i<this.getBlocs().size();i++) //parcours blocs
         {

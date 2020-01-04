@@ -152,7 +152,6 @@ public class MemoireCache {
             if(this.buffersR.size() == 0)
             {
                 this.buffersR.add(new Buffer());
-                return true;
             }
             
             if(this.buffersR.size() <= this.M -1 ) //si les buffersR ne sont pas remplis et que le dernier buffer de R n'est pas rempli
@@ -187,15 +186,19 @@ public class MemoireCache {
                         String attr = ls.getAttributs().get(k);
                        
                         List al = R.getIndext().getIndex().get(attr);
-                        for(int l=0;l< al.size();l++)
-                        { 
-                            if( chargeUnBufferR(R.getBlocs().get(l)) ) //si succes de charge buffer 
+
+                        if(al != null) //si il existe une jointure
+                        {
+                            for(int l=0;l< al.size();l++)
                             {
-                                //on enleve le bloc de l'index car traité
-                                al.remove(l);
-                                R.getIndext().getIndex().put(attr, al); //on met la nouvelle liste dans l'index
+                                
+                                if( chargeUnBufferR(R.getBlocs().get(l)) ) //si succes de charge buffer 
+                                {
+                                    //on enleve le bloc de l'index car traité
+                                    enleveBlocIndex(R, l); // et il faut aussi enlever le bloc dans "chaque clef"
+                                }
+
                             }
-                               
                         }
                         
                     }  
@@ -204,6 +207,24 @@ public class MemoireCache {
                 
             }
         }
+    }
+    
+    public void enleveBlocIndex(Table R, int p)
+    {
+        for (String i : R.getIndext().getIndex().keySet()) 
+        {
+            List<Integer> rl = R.getIndext().getIndex().get(i);
+            
+            for(int j=0;j<rl.size(); j++)
+            {
+                if(rl.get(j) == p )
+                {
+                    rl.remove(p);
+                }
+            }
+            R.getIndext().getIndex().put(i,rl);
+        }
+        
     }
     
     

@@ -34,26 +34,30 @@ public class Appli extends javax.swing.JFrame {
         
         this.lestables.add(genereTableR());
         this.lestables.add(genereTableS());                
-        System.out.println(lestables.get(2).toString());
-        System.out.println(lestables.get(3).toString());
+        //System.out.println(lestables.get(2).toString());
+        //System.out.println(lestables.get(3).toString());
         
         //this.lestables.add(ProduitCart(lestables.get(0), "Ville",lestables.get(1), "Ville"));       
         //this.lestables.add(ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville"));
         
         this.lestables.add(genereTableR_IndexVille());
         this.lestables.add(genereTableS_IndexVille());
-        System.out.println(lestables.get(4).toString());
-        System.out.println(lestables.get(5).toString());
+        //System.out.println(lestables.get(4).toString());
+        //System.out.println(lestables.get(5).toString());
         
         this.lestables.add(genereTable1Index());
         this.lestables.add(genereTable2Index());
-        System.out.println(lestables.get(6).toString());
-        System.out.println(lestables.get(7).toString());
+        //System.out.println(lestables.get(6).toString());
+        //System.out.println(lestables.get(7).toString());
         
         
         //TEST
         //attention : le premier paramètre doit être la table avec l'index
-        //this.lestables.add(keyLookup(lestables.get(4), "Ville", lestables.get(3), "Ville" ));
+        this.lestables.add(keyLookup(lestables.get(4), "Ville", lestables.get(3), "Ville" ));
+        System.out.println("\n \n --------------");
+        System.out.println(lestables.get(8));
+        
+        //System.out.println(ProduitCart(lestables.get(4), "Ville",lestables.get(3), "Ville"));
         
         
         initJList();
@@ -262,8 +266,7 @@ public class Appli extends javax.swing.JFrame {
     public Table genereTable1Index()
     {
         Table res = genereTable1();
-        Index ind = new Index(2); // 1 -> ville
-        res.setIndext(ind);
+        res.remplirIndex(2); //2 -> Ville
         res.setNom("Etudiant(Ville)");        
         return res;
     }
@@ -271,8 +274,7 @@ public class Appli extends javax.swing.JFrame {
     public Table genereTable2Index()
     {
         Table res = genereTable2();
-        Index ind = new Index(3); // 1 -> ville
-        res.setIndext(ind);
+        res.remplirIndex(3); // 3 -> Ville
         res.setNom("Habitant(Ville)");        
         return res;
     }
@@ -367,17 +369,15 @@ public class Appli extends javax.swing.JFrame {
     public Table genereTableR_IndexVille()
     {
         Table res = genereTableR();
-        Index ind = new Index(1); // 1 -> ville
-        res.setIndext(ind);
+        res.remplirIndex(1); // 1 -> ville
         res.setNom("R(Ville)");
         return res;
     }
     
     public Table genereTableS_IndexVille()
     {
-        Table res = genereTableS();
-        Index ind = new Index(1); // 1 -> ville
-        res.setIndext(ind);
+        Table res = genereTableS(); 
+        res.remplirIndex(1); // 1 -> ville 
         res.setNom("S(Ville)");        
         return res;
     }
@@ -400,6 +400,7 @@ public class Appli extends javax.swing.JFrame {
             if(R.getAttribut().get(i).equals(a))
             {
                 this.memCache.pos_attr_jointR = i;
+                //R.remplirIndex(i); //si jointure avec index
                 System.out.println("Jointure : pos_attr_jointR="+i);
             }
         }
