@@ -24,6 +24,7 @@ public class Table {
         this.nom = n;
         this.blocs = new ArrayList<Bloc>();
         this.blocs.add(new Bloc());
+        this.indext = new Index(1);
     }
 
     public List<Bloc> getBlocs() {
@@ -32,9 +33,7 @@ public class Table {
 
     public void setLignes(List<Bloc> blocs) {
         this.blocs = blocs;
-    }
-
-    
+    }    
 
     public String getNom() {
         return nom;
@@ -48,6 +47,16 @@ public class Table {
         return attributs;
     }
 
+    public void setIndext(Index indext) {
+        this.indext = indext;
+        this.remplirIndex(indext.getPos_i());
+    }
+
+    public Index getIndext() {
+        return indext;
+    }
+
+    
    
     
     //méthode pour insérer les lignes dans les blocs selon leurs capacitées
@@ -68,11 +77,17 @@ public class Table {
 
     @Override
     public String toString() {
+
         String res = "Table {\n" ;
         for (int i =0 ; i<blocs.size();i++){
            res += "\t"+i + " : " + blocs.get(i).toString() +"\n";
         } 
         res +='}';
+        
+        if(this.indext.getIndex().size() != 0)
+        {
+            res+="\n"+this.indext.toString();
+        }  
         
         return res;
     }
@@ -99,19 +114,19 @@ public class Table {
             {
                 for(int k=0; k<this.getBlocs().get(i).getLignes().get(j).getAttributs().size();k++) //parcours attributs
                 {
-                    if(this.getBlocs().get(i).getLignes().get(j).getAttributs().get(k) == this.getBlocs().get(i).getLignes().get(j).getAttributs().get(pos) ) //pour parcourir uniquement l'attribut d'index
+                    if(k == pos ) //pour parcourir uniquement l'attribut d'index
                     {
                         String attr = this.getBlocs().get(i).getLignes().get(j).getAttributs().get(k);
-                        
                         if( indext.getIndex().get(k) == null) //si attribut pas dans l'index on l'ajoute
                         {
                             ArrayList l = new ArrayList<Integer>();
                             l.add(i); //on ajoute l'indice du bloc correspondant a l'attribut
-                            indext.getIndex().put(attr, new ArrayList<Integer>() );
+                            indext.getIndex().put(attr, l);
                         }
                         else // l'attribut est deja present dans l'index, il faut ajouter l'indice du bloc
                         {
-                            indext.getIndex().get(attr).add(i); // on ajoute l'indice du bloc correspondant à l'attribut 
+                            indext.getIndex().get(attr).add(i); // on ajoute l'indice du bloc correspondant à l'attribut
+                            System.out.println("coucou"+i);
                         }
                     }
                 }

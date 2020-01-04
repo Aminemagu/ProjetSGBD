@@ -39,7 +39,18 @@ public class Index {
         this.index = index;
     }
 
-    
+    public String toString()
+    {
+        String s="AFFICHAGE DE L'INDEX sur pos_attr : "+this.pos_i;
+        for (String i : this.getIndex().keySet()) 
+        {
+            s+="\n clef: " + i + " adresse: ";
+            for(int j=0;j<this.index.get(i).size(); j++)
+                s+= this.getIndex().get(i).get(j)+";";
+        }
+        s+="\n";
+        return s;
+    }
     
     
     

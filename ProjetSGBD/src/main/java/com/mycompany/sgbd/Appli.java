@@ -35,10 +35,17 @@ public class Appli extends javax.swing.JFrame {
         Table S = lestables.get(1);
         
         this.lestables.add(genereTableR());
-        this.lestables.add(genereTableS());        
+        this.lestables.add(genereTableS());                
+        System.out.println(lestables.get(2).toString());
+        System.out.println(lestables.get(3).toString());
         
         //this.lestables.add(ProduitCart(lestables.get(0), "Ville",lestables.get(1), "Ville"));       
         //this.lestables.add(ProduitCart(lestables.get(2), "Ville",lestables.get(3), "Ville"));
+        
+        this.lestables.add(genereTableR_IndexVille());
+        this.lestables.add(genereTableS_IndexVille());
+        System.out.println(lestables.get(4).toString());
+        System.out.println(lestables.get(5).toString());
         
         initJList();
     }
@@ -299,7 +306,7 @@ public class Appli extends javax.swing.JFrame {
         l3.add("Besancon");
         tableR.insertLigne(l3);
         
-        System.out.println(tableR.toString());
+        //System.out.println(tableR.toString());
         return tableR;
     }
     
@@ -326,8 +333,24 @@ public class Appli extends javax.swing.JFrame {
         l3.add("Dijon");
         tableS.insertLigne(l3);
         
-        System.out.println(tableS.toString());
+        //System.out.println(tableS.toString());
         return tableS;
+    }
+    
+    public Table genereTableR_IndexVille()
+    {
+        Table res = genereTableR();
+        Index ind = new Index(1); // 1 -> ville
+        res.setIndext(ind);        
+        return res;
+    }
+    
+    public Table genereTableS_IndexVille()
+    {
+        Table res = genereTableS();
+        Index ind = new Index(1); // 1 -> ville
+        res.setIndext(ind);        
+        return res;
     }
     
     public static String generate(int length) {
