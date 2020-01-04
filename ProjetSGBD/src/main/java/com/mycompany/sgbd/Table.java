@@ -125,8 +125,14 @@ public class Table {
                         }
                         else // l'attribut est deja present dans l'index, il faut ajouter l'indice du bloc
                         {
-                            indext.getIndex().get(attr).add(i); // on ajoute l'indice du bloc correspondant à l'attribut
-                            
+                            int t = 0;
+                            for(int l =0; l<indext.getIndex().get(attr).size();l++)
+                            {
+                                if(indext.getIndex().get(attr).get(l) == i) 
+                                    t=t+1;
+                            }
+                            if( t==0 )
+                                indext.getIndex().get(attr).add(i); // si bloc pas présent dans la liste on ajoute l'indice du bloc 
                         }
                     }
                 }

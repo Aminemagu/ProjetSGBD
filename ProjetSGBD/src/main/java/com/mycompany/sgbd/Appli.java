@@ -432,6 +432,40 @@ public class Appli extends javax.swing.JFrame {
         return memCache.tableCache;
     }
     
+    
+    private Table keyLookup(Table R, String a, Table S, String b)
+    {
+        Table res = genereTableJoin(R, a, S, b);
+        String nomTable = "keyLookup" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
+        System.out.println(nomTable+"\n");
+        res.setNom(nomTable);
+        
+        memCache.tableCache = res;        
+        initCurseurRetS();
+        this.cout_bloc = 0;
+        
+        do
+        {
+            memCache.getBufferS().getB().clear(); // flush du bufferS
+            memCache.chargeDernierBuffer(S); //charge du bufferS
+
+            do
+            {
+                memCache.getBuffersR().clear(); //flush des buffersR
+                memCache.chargeBuffer(R); // charge des buffersR
+                //methode parcours buff
+                memCache.parcoursMem();
+                System.out.println(memCache.toString());
+                this.cout_bloc+=memCache.CartesienCout();
+            }while(!memCache.getBuffersR().isEmpty());
+            
+        }while (!memCache.getBufferS().getB().isEmpty() );
+        
+        //memCache.getBufferS().getB().add(new Bloc()); // init 
+        
+        return memCache.tableCache;
+    }
+    
     private void initJList()
     {
         def_jlist.clear();
