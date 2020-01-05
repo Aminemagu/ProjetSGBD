@@ -149,10 +149,21 @@ public class MemoireCache {
     
     public boolean chargeUnBufferR(Bloc br)
     {
-            if(this.buffersR.size() == 0)
+            
+            if (this.buffersR.size() == this.getM()-1 ) // si completement rempli on le clear
+            {
+                if(this.buffersR.get(this.M-2).getB().size() == this.bufferS.getCapacite() ) 
+                {
+                    this.buffersR.clear();
+                }
+            }
+            
+            if(this.buffersR.size() == 0) //si completement vide on ajoute un buffer à buffersR
             {
                 this.buffersR.add(new Buffer());
-            }
+            } 
+                
+                    
             
             if(this.buffersR.size() <= this.M -1 ) //si les buffersR ne sont pas remplis et que le dernier buffer de R n'est pas rempli
             {
@@ -228,7 +239,17 @@ public class MemoireCache {
                     rl.remove(p);
                 }
             }
-            R.getIndext().getIndex().put(i,rl);
+            
+            R.getIndext().getIndex().put(i,rl); //suppr de la valeur de la clef correspondant au bloc 
+
+        }
+        
+        for (int i=0;  i < R.getIndext().getIndex().size(); i++) 
+        {
+        if( R.getIndext().getIndex().get(R.getIndext().getIndex().keySet().toArray()[i]).size() == 0 ) //si la valeur de la clef correspond a une liste vide
+            {            
+                R.getIndext().getIndex().remove(R.getIndext().getIndex().values().toArray()[i]);; //suppr de la clef                
+            }
         }
         
     }

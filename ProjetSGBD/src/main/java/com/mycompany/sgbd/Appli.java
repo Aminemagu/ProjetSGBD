@@ -53,7 +53,7 @@ public class Appli extends javax.swing.JFrame {
         
         //TEST
         //attention : le premier paramètre doit être la table avec l'index
-        this.lestables.add(keyLookup(lestables.get(4), "Ville", lestables.get(3), "Ville" )); //-> fonctionne
+        this.lestables.add(keyLookup(lestables.get(6), "Ville", lestables.get(7), "Ville" )); //-> fonctionne
         
         //this.lestables.add(keyLookup(lestables.get(6), "Ville", lestables.get(7), "Ville" ));
         System.out.println("\n \n --------------");
@@ -493,7 +493,8 @@ public class Appli extends javax.swing.JFrame {
                 memCache.parcoursMem();
                 System.out.println(memCache.toString());
                 this.cout_bloc+=memCache.CartesienCout();
-            }while(!memCache.getBuffersR().isEmpty());
+                System.out.println("TAILLE :           "+R.getIndext().getIndex().size());
+            }while(!memCache.getBuffersR().isEmpty() ); //&& (R.getIndext().getIndex().size() !=0)
             
         }while (!memCache.getBufferS().getB().isEmpty() );
         
