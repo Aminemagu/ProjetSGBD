@@ -255,7 +255,7 @@ public class MemoireCache {
     }
     
     
-    public int CartesienCout()
+    public int Cout()
     {
         int c = this.bufferS.getB().size(); //ajout des blocs de S dans le buffer
         

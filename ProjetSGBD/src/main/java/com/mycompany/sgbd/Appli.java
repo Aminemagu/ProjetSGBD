@@ -53,7 +53,7 @@ public class Appli extends javax.swing.JFrame {
         
         //TEST
         //attention : le premier paramètre doit être la table avec l'index
-        this.lestables.add(keyLookup(lestables.get(6), "Ville", lestables.get(7), "Ville" )); //-> fonctionne
+        this.lestables.add(keyLookup(lestables.get(4), "Ville", lestables.get(5), "Ville" )); //-> fonctionne
         
         //this.lestables.add(keyLookup(lestables.get(6), "Ville", lestables.get(7), "Ville" ));
         System.out.println("\n \n --------------");
@@ -83,7 +83,7 @@ public class Appli extends javax.swing.JFrame {
         BTN_produitcart = new javax.swing.JButton();
         LBL_selection = new javax.swing.JLabel();
         LBL_cout = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        BTN_key = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,7 +124,12 @@ public class Appli extends javax.swing.JFrame {
 
         LBL_cout.setText("Coût (Nombre de blocs lus) =");
 
-        jButton1.setText("KeyLookup() sur Ville");
+        BTN_key.setText("KeyLookup() sur Ville");
+        BTN_key.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_keyActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,7 +148,7 @@ public class Appli extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                     .addComponent(BTN_produitcart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(LBL_selection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BTN_key, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -165,7 +170,7 @@ public class Appli extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addComponent(BTN_produitcart)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(BTN_key)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -192,6 +197,22 @@ public class Appli extends javax.swing.JFrame {
         else
             this.LBL_selection.setText("Il n'y a pas 2 tables selectionnées !");
     }//GEN-LAST:event_BTN_produitcartActionPerformed
+
+    private void BTN_keyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_keyActionPerformed
+        List<Integer> items = new ArrayList<Integer>();
+        if(jList1.getSelectedIndices().length == 2)
+        {
+            items.add(jList1.getSelectedIndices()[0]);
+            items.add(jList1.getSelectedIndices()[1]);
+            this.lestables.add(keyLookup(lestables.get(items.get(0)), "Ville",lestables.get(items.get(1)), "Ville"));            
+            this.LBL_selection.setText(lestables.get(items.get(0)).getNom()+" KeyLookup "+lestables.get(items.get(1)).getNom());
+            initJList();
+            
+            this.LBL_cout.setText("Coût (Nombre de blocs lus) = "+this.cout_bloc);
+        }
+        else
+            this.LBL_selection.setText("Il n'y a pas 2 tables selectionnées ou la 1ère table ne possède pas d'index");
+    }//GEN-LAST:event_BTN_keyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -455,7 +476,7 @@ public class Appli extends javax.swing.JFrame {
                 //methode parcours buff
                 memCache.parcoursMem();
                 System.out.println(memCache.toString());
-                this.cout_bloc+=memCache.CartesienCout();
+                this.cout_bloc+=memCache.Cout();
             }while(!memCache.getBuffersR().isEmpty());
             
         }while (!memCache.getBufferS().getB().isEmpty() );
@@ -492,7 +513,7 @@ public class Appli extends javax.swing.JFrame {
                 //methode parcours buff
                 memCache.parcoursMem();
                 System.out.println(memCache.toString());
-                this.cout_bloc+=memCache.CartesienCout();
+                this.cout_bloc+=memCache.Cout();
                 System.out.println("TAILLE :           "+R.getIndext().getIndex().size());
             }while(!memCache.getBuffersR().isEmpty() ); //&& (R.getIndext().getIndex().size() !=0)
             
@@ -552,10 +573,10 @@ public class Appli extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTN_key;
     private javax.swing.JButton BTN_produitcart;
     private javax.swing.JLabel LBL_cout;
     private javax.swing.JLabel LBL_selection;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
