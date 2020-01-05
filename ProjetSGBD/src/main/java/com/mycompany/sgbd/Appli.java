@@ -59,7 +59,7 @@ public class Appli extends javax.swing.JFrame {
         System.out.println("\n \n --------------");
         //System.out.println(lestables.get(8));
         
-        //System.out.println(ProduitCart(lestables.get(4), "Ville",lestables.get(3), "Ville"));
+        System.out.println(ProduitCart(lestables.get(0), "Ville",lestables.get(1), "Ville"));
         
         
         initJList();
@@ -515,7 +515,6 @@ public class Appli extends javax.swing.JFrame {
             
         }while (!memCache.getBufferS().getB().isEmpty() );
         
-        //memCache.getBufferS().getB().add(new Bloc()); // init 
         
         return memCache.tableCache;
     }
