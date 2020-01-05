@@ -53,7 +53,7 @@ public class Appli extends javax.swing.JFrame {
         
         //TEST
         //attention : le premier paramètre doit être la table avec l'index
-        this.lestables.add(keyLookup(lestables.get(4), "Ville", lestables.get(5), "Ville" )); //-> fonctionne
+        //this.lestables.add(keyLookup(lestables.get(4), "Ville", lestables.get(5), "Ville" )); //-> fonctionne
         
         //this.lestables.add(keyLookup(lestables.get(6), "Ville", lestables.get(7), "Ville" ));
         System.out.println("\n \n --------------");
@@ -308,8 +308,7 @@ public class Appli extends javax.swing.JFrame {
         attributs.add("id_hab");
         attributs.add("nom");
         attributs.add("Ville");
-        attributs.add("Prenom");
-        attributs.add("age");
+
 
         Table tableR = new Table("Habitant", attributs);
 
@@ -318,8 +317,7 @@ public class Appli extends javax.swing.JFrame {
             l4.add("" + i);
             l4.add(generate(6));
             l4.add("Dijon");
-            l4.add(generate(6));            
-            l4.add("" + ((int) (Math.random() * 100)));
+
             tableR.insertLigne(l4);
         }
         
@@ -327,8 +325,7 @@ public class Appli extends javax.swing.JFrame {
         l.add("13");
         l.add("JILEAU");
         l.add("Macon");
-        l.add("Felix");
-        l.add("58");
+
         tableR.insertLigne(l);
         
         return tableR;
@@ -459,7 +456,6 @@ public class Appli extends javax.swing.JFrame {
         String nomTable = "ResProduitCart_" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
         System.out.println(nomTable+"\n");
         res.setNom(nomTable);
-        
         memCache.tableCache = res;        
         initCurseurRetS();
         this.cout_bloc = 0;
@@ -496,7 +492,7 @@ public class Appli extends javax.swing.JFrame {
         String nomTable = "keyLookup" + R.getNom() + "_U_" + S.getNom() +"_sur_"+a;
         System.out.println(nomTable+"\n");
         res.setNom(nomTable);
-        
+        R.remplirIndex(IndiceJointure(R,a));
         memCache.tableCache = res;        
         initCurseurRetS();
         this.cout_bloc = 0;
@@ -565,6 +561,17 @@ public class Appli extends javax.swing.JFrame {
         jTable1.setModel(def_table);
     }
     
+    public int IndiceJointure(Table R, String s)
+    {
+        for(int i=0; i< R.getAttribut().size();i++)
+        {
+            if(R.getAttribut().get(i) == s)
+            {
+                return i;
+            }
+        }
+        return 1;
+    }
     
     
     
