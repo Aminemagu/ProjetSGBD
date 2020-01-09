@@ -45,8 +45,8 @@ public class Appli extends javax.swing.JFrame {
         //System.out.println(lestables.get(4).toString());
         //System.out.println(lestables.get(5).toString());
         
-        this.lestables.add(genereTable1Index());
-        this.lestables.add(genereTable2Index());
+        //this.lestables.add(genereTable1Index());
+        //this.lestables.add(genereTable2Index());
         //System.out.println(lestables.get(6).toString());
         //System.out.println(lestables.get(7).toString());
         
@@ -504,14 +504,14 @@ public class Appli extends javax.swing.JFrame {
 
             do
             {
-                memCache.getBuffersR().clear(); //flush des buffersR                
+                memCache.getBuffersR().clear(); //flush des buffersR
+                System.out.println("INDEX : \n"+R.getIndext().getIndex().toString());
                 memCache.chargeBufferKeylook(R); // charge des buffersR
                 //methode parcours buff
                 memCache.parcoursMem();
                 System.out.println(memCache.toString());
                 this.cout_bloc+=memCache.Cout();
-                System.out.println("TAILLE :           "+R.getIndext().getIndex().size());
-            }while(!memCache.getBuffersR().isEmpty() ); //&& (R.getIndext().getIndex().size() !=0)
+            }while(!R.getIndext().getIndex().isEmpty() || !memCache.getBuffersR().isEmpty() ); //|| 
             
         }while (!memCache.getBufferS().getB().isEmpty() );
         

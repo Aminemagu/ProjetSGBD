@@ -6,7 +6,9 @@
 package com.mycompany.sgbd;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -149,33 +151,37 @@ public class MemoireCache {
     
     public boolean chargeUnBufferR(Bloc br)
     {
+            //cas initial -> buffer vide
             
-            if (this.buffersR.size() == this.getM()-1 ) // si completement rempli on le clear
+            if(this.buffersR.isEmpty())
+            {
+                this.buffersR.add(new Buffer());
+                System.out.println("creat bufferR");
+            }
+            
+            
+            if (this.buffersR.size() == this.getM()-1) // si completement rempli on le clear
             {
                 if(this.buffersR.get(this.M-2).getB().size() == this.bufferS.getCapacite() ) 
                 {
                     this.buffersR.clear();
+                    this.buffersR.add(new Buffer());
                 }
             }
-            
-            if(this.buffersR.size() == 0) //si completement vide on ajoute un buffer à buffersR
-            {
-                this.buffersR.add(new Buffer());
-            } 
-                
+  
                     
             
-            if(this.buffersR.size() <= this.M -1 ) //si les buffersR ne sont pas remplis et que le dernier buffer de R n'est pas rempli
+            if( (this.buffersR.size() <= this.M -1) ) //si les buffersR ne sont pas remplis et que le dernier buffer de R n'est pas rempli
             {
                
                //allocation d'un buffer si le precdent est plein et que la taille du BuffersR n'excede pas M-1
-               if( ( this.buffersR.get(buffersR.size()-1).getB().size() == this.bufferS.getCapacite() ) && (this.buffersR.size() != this.M-1 ))
+               if( ( this.buffersR.get(buffersR.size()-1).getB().size() == this.bufferS.getCapacite() ) && (this.buffersR.size() != this.M-1 ) )
                {
                    this.buffersR.add(new Buffer());
                }
                
                //si dernier element pas rempli et que ce n'est pas le dernier buffer
-               if( (this.buffersR.get(buffersR.size()-1).getB().size() < this.bufferS.getCapacite() ) && (this.buffersR.size() != this.M-1 ) )
+               if( (this.buffersR.get(buffersR.size()-1).getB().size() < this.bufferS.getCapacite() - 1 )  )
                {
                    this.buffersR.get(buffersR.size()-1).getB().add(br);
                    return true;
@@ -203,15 +209,14 @@ public class MemoireCache {
                         String attr = ls.getAttributs().get(k);
                        
                         List al = R.getIndext().getIndex().get(attr);
-                        if(al == null)
-                           System.out.println(attr);
+                        //if(al == null)
+                          // System.out.println("Liste vide pour"+attr);
                         if(al != null) //si il existe une jointure
                         {
                             for(int l=0;l< al.size();l++)
                             {
                                 if( chargeUnBufferR(R.getBlocs().get(l)) ) //si succes de charge buffer 
                                 {
-                                    //on enleve le bloc de l'index car traité
                                     enleveBlocIndex(R, l); // et il faut aussi enlever le bloc dans "chaque clef"
                                 }
 
@@ -244,13 +249,26 @@ public class MemoireCache {
 
         }
         
-        for (int i=0;  i < R.getIndext().getIndex().size(); i++) 
-        {
-        if( R.getIndext().getIndex().get(R.getIndext().getIndex().keySet().toArray()[i]).size() == 0 ) //si la valeur de la clef correspond a une liste vide
-            {            
-                R.getIndext().getIndex().remove(R.getIndext().getIndex().values().toArray()[i]);; //suppr de la clef                
+        
+        
+        for(Iterator<Map.Entry<String, List<Integer>>> it = R.getIndext().getIndex().entrySet().iterator(); it.hasNext(); ) {
+            Map.Entry<String, List<Integer>> entry = it.next();
+            if(entry.getValue().size() == 0) {
+                System.out.println("Suppr de la clef "+entry.getKey());
+                it.remove();
             }
         }
+        
+        /*
+        for (String i : R.getIndext().getIndex().keySet() ) 
+        {
+            int taille_list = R.getIndext().getIndex().get(i).size();
+            if( taille_list == 0 ) //si la valeur de la clef correspond a une liste vide
+                {          
+                    R.getIndext().getIndex().remove(i);; //suppr de la clef                
+                }
+        }
+        */
         
     }
     
