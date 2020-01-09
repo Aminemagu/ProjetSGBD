@@ -510,7 +510,7 @@ public class Appli extends javax.swing.JFrame {
                 //methode parcours buff
                 memCache.parcoursMem();
                 System.out.println(memCache.toString());
-                this.cout_bloc+=memCache.Cout();
+                this.cout_bloc=1;
             }while(!R.getIndext().getIndex().isEmpty() || !memCache.getBuffersR().isEmpty() ); //|| 
             
         }while (!memCache.getBufferS().getB().isEmpty() );
